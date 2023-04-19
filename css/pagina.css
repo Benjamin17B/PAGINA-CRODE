@@ -144,9 +144,8 @@ footer > p{
   background-color: #f9f9f9;
 }
 #formu .entrada{
-  width: 220px;
-  height: 30px;
-  margin-bottom: 60px;
+  width: 150px;
+  height: 15px;
   border-radius: 3px;
   border: 1px solid #000;
   padding: 2px;
@@ -154,8 +153,19 @@ footer > p{
   margin-top: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
+#formu .CajonGrande{
+  width: 190px;
+  height: 80px;
+  border-radius: 3px;
+  border: 1px solid #000;
+  padding: 2px;
+  outline: none;
+  margin-top: 10px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
+
 #formu .boton{
-  background-color: rgb(0, 69, 182);
+  background-color: rgba(0, 69, 182, 0.7); 
   border: none;
   height: 45px;
   width: 100px;
@@ -169,14 +179,14 @@ footer > p{
 }
 #formu .boton:hover{
   transition: 1000ms;
-  background-color: rgba(0, 69, 182, 0.7);
+  background-color: rgb(0, 69, 182);
 }
-#formu .entrada:valid{
+#formu .entrada:valid, .CajonGrande:valid{
   transition: 800ms;
   color: #00BB03;
   border: 1px solid #00BB03;
 }
-#formu .entrada:invalid{
+#formu .entrada:invalid, .CajonGrande:invalid{
   transition: 500ms;
   color: #FC0505;
 }
