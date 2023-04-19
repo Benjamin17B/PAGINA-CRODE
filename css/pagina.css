@@ -191,7 +191,7 @@ footer > p{
   color: #FC0505;
 }
 #formu .error{
-  width: 500px;
+  width: 350px;
   padding: 0;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -200,8 +200,7 @@ footer > p{
   color: #FFF;
   font-size: 1em;
   box-sizing: border-box;
-  margin-top: -45px;
-  margin-left: 97px;
+  margin-left: 10px;
 }
 #formu .error.active{
   padding: 0.2em;

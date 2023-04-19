@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>CPU'S</title>
     <link rel="stylesheet" href="../css/pagina.css">
+    <script src="../js/validar.js"></script>
 </head>
 <header>
     <h1>Asistencia Tecnica y Mantenimiento</h1>
@@ -29,13 +30,19 @@
     
                 <td> 
                     <label for="NUsuario" class="entrada">Nombre del Usuario:</label>
-                    <input type="text" id="NUsuario" class="entrada" pattern="[A-Z ]+"><br> <br>
+                    <input type="text" id="NUsuario" class="entrada" pattern="[A-Z ]+">
+                    <br> <br>
+                    <span class="error"></span>
             
                     <label for="APMaterno" class="entrada">Apellido Paterno:</label>
-                    <input type="text" id="APMaterno" class="entrada" pattern="[A-Z]+"><br> <br>
+                    <input type="text" id="APMaterno" class="entrada" pattern="[A-Z]+">
+                    
+                    <br><br>
             
                     <label for="APParteno" class="entrada">Apellido Materno:</label>
-                    <input type="text" id="APParteno" class="entrada" pattern="[A-Z]+"><br><br>
+                    <input type="text" id="APParteno" class="entrada" pattern="[A-Z]+">
+                    
+                    <br><br>
             
                     <label for="Marca" class="entrada">Marca:</label>
                     <input type="text" id="Marca" class="entrada" pattern="[A-Z ]+"><br><br>
@@ -83,7 +90,7 @@
                     <label for="Mac" class="entrada">Mac:</label>
                     <input type="text" id="Mac" class="entrada"><br><br>
 
-                    <button class="boton" type="submit">GUARDAR</button>
+                    <button id="btnGuardar" class="boton" type="submit">GUARDAR</button>
                 </td>
                
             </table>
