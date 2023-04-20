@@ -125,14 +125,10 @@ footer > p{
 }
 #titFormu > h2,h1{
   text-align: center;
-  font-size: 1.8em;
+  font-size: 1.5em;
   font-family: helvetica;
   font-weight: bold;
-  color: #ffffff;
-  text-shadow: 2px 0px #000000,
-               -2px 0px #000000,
-               0px 2px #000000,
-               0px -2px #000000;
+  color: #000000;
 }
 #formu label,.entrada{
   font-weight: 700;
@@ -187,14 +183,13 @@ footer > p{
   color: #FC0505;
 }
 #formu .error{
-  width: 350px;
+  width: 310px;
   padding: 0;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   display: block;
-  background-color: #000;
-  color: #FFF;
-  font-size: 1em;
+  color: #f70000;
+  font-size: 0.8em;
   box-sizing: border-box;
   margin-left: 10px;
 }
