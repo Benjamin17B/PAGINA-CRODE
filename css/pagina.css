@@ -16,19 +16,15 @@ header, footer{
   height: 150px;
   padding-top: 30px;
   width: 100%;
-  background-color: #ff0000;
+  background-color: #7e7c7c;
 }
 header > h1{
   float: none;
   text-align: center;
-  font-family: fantasy;
+  font-family: sans-serif;
   font-size: 2.5em;
   font-weight: bold;
   color: #ffffff;
-  text-shadow: 8px 0 #000000,
-              -5px 0 #000000,
-               0 8px #000000,
-               0 -5px #000000;
 }
 
 .izquierda > img{

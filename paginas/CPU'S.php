@@ -103,3 +103,5 @@
 </footer>
 </body>
 </html>
+
+<!-- localhost:8017/PRACTICA/paginas/CPU'S.php -->
