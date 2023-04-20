@@ -118,7 +118,7 @@ if(isset($_POST['btnGuardar'])){
                     </label>
 
                     <label for="Observaciones">Observaciones:
-                    <input type="text" id="Observaciones"  name="Observaciones" class="CajonGrande"pattern="[A-Z]+">
+                    <input type="text" id="Observaciones"  name="Observaciones" class="CajonGrande">
                     <span class="error"></span><br>
                     </label>
                 </td>
