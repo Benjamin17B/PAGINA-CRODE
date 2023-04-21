@@ -8,7 +8,6 @@ CREATE TABLE usuario(
   nombre VARCHAR(20) NOT NULL,
   apellidoP VARCHAR(20) NOT NULL,
   apellidoM VARCHAR(30) NOT NULL,
-
   marca VARCHAR(30) NOT NULL,
   modelo VARCHAR(30) NOT NULL,
   numserie VARCHAR(30) NOT NULL,
