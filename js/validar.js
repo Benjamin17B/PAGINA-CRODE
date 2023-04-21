@@ -225,7 +225,7 @@ function Vdiscduro(){
       muestra(elemento,"Ingrese el Disco Duro");
     }
     if(elemento.validity.patternMismatch){
-      muestra(elemento,"Solo Acepta Letras Mayusculas");
+      muestra(elemento,"Solo Acepta Numeros");
     }
     return false;
   }
@@ -245,7 +245,7 @@ function Vram(){
       muestra(elemento,"Ingrese la Memoria Ram");
     }
     if(elemento.validity.patternMismatch){
-      muestra(elemento,"Solo Acepta Letras Mayusculas");
+      muestra(elemento,"Solo Acepta Giga (G) y Megabits (M)");
     }
     return false;
   }

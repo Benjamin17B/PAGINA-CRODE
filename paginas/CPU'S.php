@@ -39,7 +39,6 @@ if(isset($_POST['btnGuardar'])){
                 $datos = mysqli_fetch_assoc($rs);
                 $id = $datos['iduser'];
 
-                $sql = "INSERT INTO usuario VALUES('$NUsuario','$APParteno','$APMaterno')";
                 if (operacion($sql,$cone)) {
                   $mensaje = "Registro con exito!!!";
                 }
