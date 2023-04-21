@@ -1,6 +1,6 @@
 <?php
+$mensaje = "";
 if(isset($_POST['btnGuardar'])){
-
     $NUsuario = $_POST['NUsuario'];
     $APMaterno = $_POST['APMaterno'];
     $APParteno = $_POST['APParteno'];
@@ -18,8 +18,41 @@ if(isset($_POST['btnGuardar'])){
     $NEquipo = $_POST['NEquipo'];
     $IP = $_POST['IP'];
     $Mac = $_POST['Mac'];
-    
 
+    include('../bd/bd.php');
+    $cone = conectar();
+    if ($cone == false) {
+        $mensaje = "Error: Falla en la conexion a la BD...";
+      }else{
+        echo "conexion exitosa";
+        $sql = "SELECT * FROM usuario WHERE (nombre = '$NUsuario')";
+        $rs = consulta($sql,$cone);
+        if ($rs == false) {
+            $mensaje = "Error: Al consultar la BD...";
+          }
+          else{
+            $sql = "INSERT INTO usuario VALUES(NULL,'$NUsuario','$APParteno','$APMaterno')";
+
+            if (operacion($sql,$cone) == true) {
+                $sql = "SELECT * FROM usuario WHERE nombre = '$NUsuario'";
+                $rs = consulta($sql,$cone);
+                $datos = mysqli_fetch_assoc($rs);
+                $id = $datos['iduser'];
+
+                $sql = "INSERT INTO usuario VALUES('$NUsuario','$APParteno','$APMaterno')";
+                if (operacion($sql,$cone)) {
+                  $mensaje = "Registro con exito!!!";
+                }
+                else {
+                  $mensaje = "Error: Al registrar los datos ";
+                }
+              }
+              else {
+                $mensaje = "Error: Al gurdar los datos...";
+              }
+        }
+        mysqli_close($cone);
+      }
 }
 ?>
 <!DOCTYPE html>
@@ -147,6 +180,11 @@ if(isset($_POST['btnGuardar'])){
                 </td>
                
             </table>
+            <?php
+                if ($mensaje!="") {
+                    echo "<span class='error'>$mensaje</span>'";
+                }
+            ?>
         </form>
     </section>
 </main>
