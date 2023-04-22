@@ -134,7 +134,7 @@ function Vmodelo(){
       muestra(elemento,"Ingrese el Modelo");
     }
     if(elemento.validity.patternMismatch){
-      muestra(elemento,"Solo Acepta Letras Mayusculas");
+      muestra(elemento,"Solo Acepta Letras Mayusculas y Caracteres Numericos");
     }
     return false;
   }
@@ -315,6 +315,9 @@ function VIP(){
   else{
     if(elemento.validity.valueMissing){
       muestra(elemento,"Ingrese la IP");
+    }
+    if(elemento.validity.patternMismatch){
+      muestra(elemento,"Digita La IP Hasta que esta sea Valida");
     }
     return false;
   }

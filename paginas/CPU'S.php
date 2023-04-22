@@ -31,7 +31,8 @@ if(isset($_POST['btnGuardar'])){
             $mensaje = "Error: Al consultar la BD...";
           }
           else{
-            $sql = "INSERT INTO usuario VALUES(NULL,'$NUsuario','$APParteno','$APMaterno')";
+            $sql = "INSERT INTO usuario VALUES(NULL,'$NUsuario','$APParteno','$APMaterno','$Marca','$Modelo','$numSerie','$numInventario',
+            '$So','$Procesador','$DiscoDuro','$Ram','$TipoMemoria','$Observaciones','$contraseña','$NEquipo','$IP','$Mac')";
 
             if (operacion($sql,$cone) == true) {
                 $sql = "SELECT * FROM usuario WHERE nombre = '$NUsuario'";
@@ -108,7 +109,7 @@ if(isset($_POST['btnGuardar'])){
                     </label>
 
                     <label for="Modelo">Modelo:
-                    <input type="text" id="Modelo" name="Modelo" class="entrada" pattern="[A-Z]+" required>
+                    <input type="text" id="Modelo" name="Modelo" class="entrada" pattern="[A-Z,0-9,-]+" required>
                     <span class="error"></span><br>
                     </label>
 
@@ -161,12 +162,12 @@ if(isset($_POST['btnGuardar'])){
                     </label>
 
                     <label for="NEquipo">Nombre del Equipo:
-                    <input type="text" id="NEquipo"  name="NEquipo" class="entrada" pattern="[A-Z]+" required>
+                    <input type="text" id="NEquipo"  name="NEquipo" class="entrada" pattern="[A-Z,0-9]+" required>
                     <span class="error"></span><br>
                     </label>
 
                     <label for="IP">IP:
-                    <input type="text" id="IP"  name="IP" class="entrada" required>
+                    <input type="text" id="IP"  name="IP" class="entrada" pattern="((^|\.)((25[0-5]_*)|(2[0-4]\d_*)|(1\d\d_*)|([1-9]?\d_*))){4}_*$" required>
                     <span class="error"></span><br>
                     </label>
 
