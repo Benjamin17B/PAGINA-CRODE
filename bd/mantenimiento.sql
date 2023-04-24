@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS Mantenimiento;
+/*DROP DATABASE IF EXISTS Mantenimiento;
 CREATE DATABASE sistema CHARACTER SET utf8mb4 
 COLLATE utf8mb4_general_ci;
-USE Mantenimiento;
+USE Mantenimiento;*/
 
 CREATE TABLE usuario(
   iduser INT AUTO_INCREMENT NOT NULL PRIMARY KEY,

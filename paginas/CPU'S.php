@@ -61,11 +61,23 @@ if(isset($_POST['btnGuardar'])){
     <meta charset="UTF-8">
     <title>CPU'S</title>
     <link rel="stylesheet" href="../css/pagina.css">
+    <link rel="shortcut icon" href="../img/crode.png">
     <script src="../js/validar.js" charset="utf-8"></script>
 </head>
 <header>
-    <h1>Asistencia Tecnica y Mantenimiento</h1>
+    <h1>Asistencia Técnica y Mantenimiento</h1>
 </header>
+<nav>
+		<ul>
+			<li><a href="../index.php">Inicio</a></li>
+			<li><a href="#">Servicios</a>
+				<ul>
+					<li><a href="#">CPU'S</a></li>
+					<li><a href="#">IMPRESORAS</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
 <body>
     <main> 
         <section> 
@@ -136,12 +148,12 @@ if(isset($_POST['btnGuardar'])){
                     </label>
 
                     <label for="DiscoDuro">Disco Duro:
-                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[G,M,B,0-9 ]+" required>
+                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]{2}[G,M,B,]{1}" required>
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Ram">Memoria Ram:
-                    <input type="text" id="Ram" name="Ram" class="entrada" pattern="[G,M,B,0-9 ]+" required>
+                    <input type="text" id="Ram" name="Ram" class="entrada" pattern="[0-9]{2}[G,M,B,]{1}" required>
                     <span class="error"></span><br>
                     </label>
 
