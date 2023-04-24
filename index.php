@@ -11,8 +11,8 @@
 </header>
 <nav>
 		<ul>
-			<li><a href="#">Inicio</a></li>
-			<li><a href="#">Servicios</a>
+			<li><a href="#">INICIO</a></li>
+			<li><a href="#">SERVICIOS</a>
 				<ul>
 					<li><a href="paginas/CPU'S.php">CPU'S</a></li>
 					<li><a href="#">IMPRESORAS</a></li>

@@ -69,8 +69,8 @@ if(isset($_POST['btnGuardar'])){
 </header>
 <nav>
 		<ul>
-			<li><a href="../index.php">Inicio</a></li>
-			<li><a href="#">Servicios</a>
+			<li><a href="../index.php">INICIO</a></li>
+			<li><a href="#">SERVICIOS</a>
 				<ul>
 					<li><a href="#">CPU'S</a></li>
 					<li><a href="#">IMPRESORAS</a></li>
@@ -148,12 +148,12 @@ if(isset($_POST['btnGuardar'])){
                     </label>
 
                     <label for="DiscoDuro">Disco Duro:
-                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]{2}[G,M,B,]{1}" required>
+                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]+([G,M,B,]{1})" required>
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Ram">Memoria Ram:
-                    <input type="text" id="Ram" name="Ram" class="entrada" pattern="[0-9]{2}[G,M,B,]{1}" required>
+                    <input type="text" id="Ram" name="Ram" class="entrada" pattern="[0-9]+([G,M,B,]{1})" required>
                     <span class="error"></span><br>
                     </label>
 
