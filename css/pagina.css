@@ -36,23 +36,24 @@ nav ul {
 }
 
 nav ul li {
+  background-color: rgb(184, 217, 255);
 	float: left;
 	position: relative;
   width: 160px;
 }
 
 nav ul li a {
-  background-color: rgb(186, 218, 255);
 	display: block;
 	padding: 0 10px;
 	color: #fff;
 	line-height: 60px;
 	text-decoration: none;
   color: black;
+  border-radius: 8px;
 }
 
 nav ul li:hover {
-	background-color: #444;
+	background: rgb(156, 201, 253);
 }
 
 nav ul ul {
