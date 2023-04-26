@@ -18,6 +18,7 @@ if(isset($_POST['btnGuardar'])){
     $NEquipo = $_POST['NEquipo'];
     $IP = $_POST['IP'];
     $Mac = $_POST['Mac'];
+    $Departamento =  $_POST['Departamento'];
 
     include('../bd/bd.php');
     $cone = conectar();
@@ -25,17 +26,17 @@ if(isset($_POST['btnGuardar'])){
         $mensaje = "Error: Falla en la conexion a la BD...";
       }else{
         echo "conexion exitosa";
-        $sql = "SELECT * FROM usuario WHERE (nombre = '$NUsuario')";
+        $sql = "SELECT * FROM DatosEquipo WHERE (nombre = '$NUsuario')";
         $rs = consulta($sql,$cone);
         if ($rs == false) {
             $mensaje = "Error: Al consultar la BD...";
           }
           else{
-            $sql = "INSERT INTO usuario VALUES(NULL,'$NUsuario','$APParteno','$APMaterno','$Marca','$Modelo','$numSerie','$numInventario',
+            $sql = "INSERT INTO DatosEquipo VALUES(NULL,'$NUsuario','$APParteno','$APMaterno','$Marca','$Modelo','$numSerie','$numInventario',
             '$So','$Procesador','$DiscoDuro','$Ram','$TipoMemoria','$Observaciones','$contraseña','$NEquipo','$IP','$Mac')";
 
             if (operacion($sql,$cone) == true) {
-                $sql = "SELECT * FROM usuario WHERE nombre = '$NUsuario'";
+                $sql = "SELECT * FROM DatosEquipo WHERE nombre = '$NUsuario'";
                 $rs = consulta($sql,$cone);
                 $datos = mysqli_fetch_assoc($rs);
                 $id = $datos['iduser'];
@@ -189,6 +190,35 @@ if(isset($_POST['btnGuardar'])){
                     </label>
 
                     <button id="btnGuardar" name="btnGuardar" class="boton" type="submit">GUARDAR</button>
+                </td>
+
+                <tr>
+                    <td> <br>
+                        <h1>DEPARTAMENTO ENCARGADO</h1>
+                    </td>
+                </tr>
+
+                <td>
+                    <label for="Departamento">Departamento:</label>
+                     <select name="Departamento" class="entrada" require>
+                        <option value="">Seleccione un Departamento</option>
+                        <option value="ST">Subdirección técnica</option>
+                        <option value="SA">Subdirección administrativa</option>
+                        <option value="RMS">Recursos materiales y de servicios</option>
+                        <option value="RM">Recursos humanos</option>
+                        <option value="RF">Recursos financieros</option>
+                        <option value="PRO">Producción</option>
+                        <option value="PPP">Planeación, Programación y Presupuestación</option>
+                        <option value="MTG">Metrologia</option>
+                        <option value="GTV">Gestión tecnológica y vinculación</option>
+                        <option value="DDE">Diseño y Desarrollo de Equipo</option>
+                        <option value="DIR">Dirección</option>
+                        <option value="CIT">Centro de información técnica</option>
+                        <option value="ATM">Asistencia técnica y mantenimiento</option>
+                        <option value="AM">Administración de la Calidad</option>
+                        <option value="NA">ninguna</option>
+                    </select>
+                    <br><br>
                 </td>
                
             </table>
