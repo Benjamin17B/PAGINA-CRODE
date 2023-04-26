@@ -218,11 +218,10 @@ if(isset($_POST['btnGuardar'])){
                         <option value="AM">Administración de la Calidad</option>
                         <option value="NA">ninguna</option>
                     </select>
-                    <span class="error"></span><br>
                     <br><br>
                 </td>
                
-            </table>
+            </table><br>
             <?php
                 if ($mensaje!="") {
                     echo "<span class='error'>$mensaje</span>'";

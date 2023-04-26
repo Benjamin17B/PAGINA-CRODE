@@ -26,21 +26,22 @@ CREATE TABLE DatosEquipo(
 
   /*  DEPARTAMENTO  */
 
-  CREATE TABLE public.area (
-  idarea int2 NOT NULL,
-  area varchar(100) COLLATE pg_catalog.default,
-  nivel int2,
-  idareapadre int2,
-  pp char(4) COLLATE pg_catalog.default,
-  pe char(2) COLLATE pg_catalog.default,
-  pea char(2) COLLATE pg_catalog.default,
-  pc char(2) COLLATE pg_catalog.default,
-  ridusuario int8,
-  abreviatura varchar(10) COLLATE pg_catalog.default,
+ CREATE TABLE area (
+  idarea INT NOT NULL,
+  area VARCHAR(100),
+  nivel INT,
+  idareapadre INT,
+  pp CHAR(4),
+  pe CHAR(2),
+  pea CHAR(2),
+  pc CHAR(2),
+  ridusuario INT,
+  abreviatura VARCHAR(10),
   PRIMARY KEY (idarea),
-  FOREIGN KEY (idareapadre) REFERENCES public.area (idarea) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY (ridusuario) REFERENCES public.persona (idpersona) ON DELETE NO ACTION ON UPDATE NO ACTION
+  FOREIGN KEY (idareapadre) REFERENCES area (idarea) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY (ridusuario) REFERENCES persona (idpersona) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
+
 
 INSERT INTO area(idarea, area, nivel, idareapadre, pp, pe, pea, pc, ridusuario, abreviatura) VALUES (2, 'Subdirección técnica', 20, 1, 'E010', '1 ', '1 ', '1 ', 84, 'ST');
 INSERT INTO area(idarea, area, nivel, idareapadre, pp, pe, pea, pc, ridusuario, abreviatura) VALUES (3, 'Subdirección administrativa', 20, 1, 'E010', '5 ', '5 ', '1 ', 6, 'SSA');
