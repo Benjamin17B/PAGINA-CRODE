@@ -21,6 +21,8 @@ function carga(){
   document.getElementById('NEquipo').addEventListener('input',VnEquipo,false);
   document.getElementById('IP').addEventListener('input',VIP,false);
   document.getElementById('Mac').addEventListener('input',VMac,false);
+  document.getElementById('Departamento').addEventListener('input',VDepart,false);
+
 
   document.getElementById('btnGuardar').addEventListener('click',vENVIAR,false);
 }
@@ -335,6 +337,22 @@ function VMac(){
   else{
     if(elemento.validity.valueMissing){
       muestra(elemento,"Ingrese la MAC");
+    }
+    return false;
+  }
+}
+function VDepart(){
+  var elemento = document.getElementById('Departamento');
+  error = document.querySelector("#Departamento + span.error");
+
+  if(elemento.checkValidity()){
+    error.innerHTML = "";
+    error.className = "error";
+    return true;
+  }
+  else{
+    if(elemento.validity.valueMissing){
+      muestra(elemento,"Seleccione Un Departamento");
     }
     return false;
   }

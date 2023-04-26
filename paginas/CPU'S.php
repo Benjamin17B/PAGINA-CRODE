@@ -200,7 +200,7 @@ if(isset($_POST['btnGuardar'])){
 
                 <td>
                     <label for="Departamento">Departamento:</label>
-                     <select name="Departamento" class="entrada" require>
+                     <select name="Departamento" class="entradaS" required>
                         <option value="">Seleccione un Departamento</option>
                         <option value="ST">Subdirección técnica</option>
                         <option value="SA">Subdirección administrativa</option>
@@ -218,6 +218,7 @@ if(isset($_POST['btnGuardar'])){
                         <option value="AM">Administración de la Calidad</option>
                         <option value="NA">ninguna</option>
                     </select>
+                    <span class="error"></span><br>
                     <br><br>
                 </td>
                
