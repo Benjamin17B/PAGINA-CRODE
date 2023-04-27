@@ -32,6 +32,7 @@ if(isset($_POST['btnGuardar'])){
             $mensaje = "Error: Al consultar la BD...";
           }
           else{
+            $sql2 = "INSERT INTO area VALUES(NULL, 'Subdirección técnica', 20, 1, 'E010', '1 ', '1 ', '1 ', 84, 'ST')";
             $sql = "INSERT INTO DatosEquipo VALUES(NULL,'$NUsuario','$APParteno','$APMaterno','$Marca','$Modelo','$numSerie','$numInventario',
             '$So','$Procesador','$DiscoDuro','$Ram','$TipoMemoria','$Observaciones','$contraseña','$NEquipo','$IP','$Mac')";
 
@@ -40,7 +41,8 @@ if(isset($_POST['btnGuardar'])){
                 $rs = consulta($sql,$cone);
                 $datos = mysqli_fetch_assoc($rs);
                 $id = $datos['iduser'];
-
+                
+               
                 if (operacion($sql,$cone)) {
                   $mensaje = "Registro con exito!!!";
                 }
@@ -50,6 +52,9 @@ if(isset($_POST['btnGuardar'])){
               }
               else {
                 $mensaje = "Error: Al gurdar los datos...";
+              }
+              if(operacion($sql2,$cone)){
+                $sql2 = "SELECT * FROM DatosEquipo WHERE área = '$Departamento'";
               }
         }
         mysqli_close($cone);

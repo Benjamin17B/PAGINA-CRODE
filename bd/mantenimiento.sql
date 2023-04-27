@@ -27,7 +27,7 @@ CREATE TABLE DatosEquipo(
   /*  DEPARTAMENTO  */
 
  CREATE TABLE area (
-  idarea INT NOT NULL,
+  idarea INT AUTO_INCREMENT NOT NULL,
   area VARCHAR(100),
   nivel INT,
   idareapadre INT,
