@@ -41,6 +41,8 @@ if(isset($_POST['btnGuardar'])){
                 $rs = consulta($sql,$cone);
                 $datos = mysqli_fetch_assoc($rs);
                 $id = $datos['iduser'];
+                /* ↓ Muestra datos ↓
+                    echo "$datos";*/
                 
                
                 if (operacion($sql,$cone)) {
