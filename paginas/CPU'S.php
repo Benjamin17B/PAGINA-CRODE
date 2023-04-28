@@ -62,6 +62,98 @@ if(isset($_POST['btnGuardar'])){
         mysqli_close($cone);
       }
 }
+if(isset($_POST['btnBuscar'])){
+    $NUsuario = $_POST['NUsuario'];
+    $APMaterno = $_POST['APMaterno'];
+    $APParteno = $_POST['APParteno'];
+    $Marca = $_POST['Marca'];
+    $Modelo = $_POST['Modelo'];
+    $numSerie = $_POST['numSerie'];
+    $numInventario = $_POST['numInventario'];
+    $So = $_POST['So'];
+    $Procesador = $_POST['Procesador'];
+    $DiscoDuro = $_POST['DiscoDuro'];
+    $Ram = $_POST['Ram'];
+    $TipoMemoria = $_POST['TipoMemoria'];
+    $Observaciones = $_POST['Observaciones'];
+    $contraseña = $_POST['contraseña'];
+    $NEquipo = $_POST['NEquipo'];
+    $IP = $_POST['IP'];
+    $Mac = $_POST['Mac'];
+    $Departamento =  $_POST['Departamento'];
+
+    include('../bd/bd.php');
+    $cone = conectar();
+    if ($cone == false) {
+        $mensaje = "Error: Falla en la conexion a la BD...";
+      }
+      else{
+        $sql = "SELECT * FROM datosequipo WHERE nombre = '$NUsuario'";
+        $resultado = mysqli_query($cone, $sql);
+
+    if (mysqli_num_rows($resultado) > 0) {
+        // Imprimir los resultados
+        while($fila = mysqli_fetch_assoc($resultado)) {
+
+            $NUsuario = $fila["nombre"];
+            $APMaterno = $fila['apellidoM'];
+            $APParteno = $fila['apellidoP'];
+            $Marca = $fila['marca'];
+            $Modelo = $fila['modelo'];
+            $numSerie = $fila['numserie'];
+            $numInventario = $fila['numInventario'];
+            $So = $fila['So'];
+            $Procesador = $fila['Procesador'];
+            $DiscoDuro = $fila['DiscoDuro'];
+            $Ram = $fila['Ram'];
+            $TipoMemoria = $fila['TipoMemoria'];
+            $Observaciones = $fila['Observaciones'];
+            $contraseña = $fila['contraseña'];
+            $NEquipo = $fila['NEquipo'];
+            $IP = $fila['IP'];
+            $Mac = $fila['Mac'];
+           
+        
+            }   
+        } else {
+            echo "0 resultados";
+            }   
+
+      }  
+}
+if(isset($_POST['btnBorrar'])){
+    $NUsuario = $_POST['NUsuario'];
+    $APMaterno = $_POST['APMaterno'];
+    $APParteno = $_POST['APParteno'];
+    $Marca = $_POST['Marca'];
+    $Modelo = $_POST['Modelo'];
+    $numSerie = $_POST['numSerie'];
+    $numInventario = $_POST['numInventario'];
+    $So = $_POST['So'];
+    $Procesador = $_POST['Procesador'];
+    $DiscoDuro = $_POST['DiscoDuro'];
+    $Ram = $_POST['Ram'];
+    $TipoMemoria = $_POST['TipoMemoria'];
+    $Observaciones = $_POST['Observaciones'];
+    $contraseña = $_POST['contraseña'];
+    $NEquipo = $_POST['NEquipo'];
+    $IP = $_POST['IP'];
+    $Mac = $_POST['Mac'];
+    $Departamento =  $_POST['Departamento'];
+
+    include('../bd/bd.php');
+    $cone = conectar();
+    if ($cone == false) {
+        $mensaje = "Error: Falla en la conexion a la BD...";
+      }
+      else{
+        $sql = "DELETE FROM datosequipo WHERE nombre = '$NUsuario'";
+        mysqli_query($cone, $sql);
+        $mensaje = "Datos Borrados Correctamente";
+  
+
+      }  
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,95 +200,98 @@ if(isset($_POST['btnGuardar'])){
                 <td> 
 
                 <label for="NUsuario" >Nombre del Usuario:
-                <input type="text" name="NUsuario" id="NUsuario" class="entrada" pattern="[A-Z ]+" required>
+                <input type="text" name="NUsuario" id="NUsuario" class="entrada" pattern="[A-Z ]+" required value="<?php if(isset($_POST['btnBuscar']))echo $NUsuario; ?>">
 
                 <span class="error"></span><br>
                 </label>
 
                     <label for="APParteno">Apellido Paterno:
-                    <input type="text" id="APParteno" name="APParteno" class="entrada" pattern="[A-Z]+" required>
+                    <input type="text" id="APParteno" name="APParteno" class="entrada" pattern="[A-Z]+" required value="<?php if(isset($_POST['btnBuscar']))echo $APParteno; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="APMaterno">Apellido Materno:
-                    <input type="text" id="APMaterno" name="APMaterno" class="entrada" pattern="[A-Z]+" required>
+                    <input type="text" id="APMaterno" name="APMaterno" class="entrada" pattern="[A-Z]+" required value="<?php if(isset($_POST['btnBuscar']))echo $APMaterno; ?>">
                     <span class="error"></span><br>
                     </label>
             
                     <label for="Marca">Marca:
-                    <input type="text" id="Marca" name="Marca" class="entrada" pattern="[A-Z ]+" required>
+                    <input type="text" id="Marca" name="Marca" class="entrada" pattern="[A-Z ]+" required value="<?php if(isset($_POST['btnBuscar']))echo $Marca; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Modelo">Modelo:
-                    <input type="text" id="Modelo" name="Modelo" class="entrada" pattern="[A-Z,0-9,-]+" required>
+                    <input type="text" id="Modelo" name="Modelo" class="entrada" pattern="[A-Z,0-9,-]+" required value="<?php if(isset($_POST['btnBuscar']))echo $Modelo; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="numSerie">Numero de Serie:
-                    <input type="number" id="numSerie" name="numSerie" class="entrada" pattern="[0-9]+" required>
+                    <input type="number" id="numSerie" name="numSerie" class="entrada" pattern="[0-9]+" required value="<?php if(isset($_POST['btnBuscar']))echo $numSerie; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="numInventario">Numero de Inventario:
-                    <input type="number" id="numInventario" name="numInventario" class="entrada" pattern="[0-9]+" required>
+                    <input type="number" id="numInventario" name="numInventario" class="entrada" pattern="[0-9]+" required value="<?php if(isset($_POST['btnBuscar']))echo $numInventario; ?>">
                     <span class="error"></span><br>
                     </label>
                 </td>
 
                 <td> 
                     <label for="So">So:
-                    <input type="text" id="So" name="So" class="entrada" required>
+                    <input type="text" id="So" name="So" class="entrada" required value="<?php if(isset($_POST['btnBuscar']))echo $So; ?>">
                     <span class="error"></span><br>
                     </label>
             
                     <label for="Procesador">Procesador:
-                    <input type="text" id="Procesador" name="Procesador" class="entrada" required>
+                    <input type="text" id="Procesador" name="Procesador" class="entrada" required value="<?php if(isset($_POST['btnBuscar']))echo $Procesador; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="DiscoDuro">Disco Duro:
-                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]+([G,M,B,]{1})" required>
+                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]+([G,M,B,]{1})" required value="<?php if(isset($_POST['btnBuscar']))echo $DiscoDuro; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Ram">Memoria Ram:
-                    <input type="text" id="Ram" name="Ram" class="entrada" pattern="[0-9]+([G,M,B,]{1})" required>
+                    <input type="text" id="Ram" name="Ram" class="entrada" pattern="[0-9]+([G,M,B,]{1})" required value="<?php if(isset($_POST['btnBuscar']))echo $Ram; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="TipoMemoria">Tipo de Memoria:
-                    <input type="text" id="TipoMemoria"  name="TipoMemoria" class="entrada" required>
+                    <input type="text" id="TipoMemoria"  name="TipoMemoria" class="entrada" required value="<?php if(isset($_POST['btnBuscar']))echo $TipoMemoria; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Observaciones">Observaciones:
-                    <input type="text" id="Observaciones"  name="Observaciones" class="CajonGrande">
+                    <input type="text" id="Observaciones"  name="Observaciones" class="CajonGrande" value="<?php if(isset($_POST['btnBuscar']))echo $Observaciones; ?>">
                     <span class="error"></span><br>
                     </label>
                 </td>
                 <td> 
                     <label for="contraseña">Contraseña:
-                    <input type="password" id="contraseña"  name="contraseña" class="entrada" required>
+                    <input type="password" id="contraseña"  name="contraseña" class="entrada" required value="<?php if(isset($_POST['btnBuscar']))echo $contraseña; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="NEquipo">Nombre del Equipo:
-                    <input type="text" id="NEquipo"  name="NEquipo" class="entrada" pattern="[A-Z,0-9]+" required>
+                    <input type="text" id="NEquipo"  name="NEquipo" class="entrada" pattern="[A-Z,0-9]+" required value="<?php if(isset($_POST['btnBuscar']))echo $NEquipo; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="IP">IP:
-                    <input type="text" id="IP"  name="IP" class="entrada" pattern="((^|\.)((25[0-5]_*)|(2[0-4]\d_*)|(1\d\d_*)|([1-9]?\d_*))){4}_*$" required>
+                    <input type="text" id="IP"  name="IP" class="entrada" pattern="((^|\.)((25[0-5]_*)|(2[0-4]\d_*)|(1\d\d_*)|([1-9]?\d_*))){4}_*$" required value="<?php if(isset($_POST['btnBuscar']))echo $IP; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Mac" >Mac:
-                    <input type="text" id="Mac"  name="Mac" class="entrada" required>
+                    <input type="text" id="Mac"  name="Mac" class="entrada" required value="<?php if(isset($_POST['btnBuscar']))echo $Mac; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <button id="btnGuardar" name="btnGuardar" class="boton" type="submit">GUARDAR</button>
+                    <br>
+                    <button id="btnBuscar" name="btnBuscar" class="boton" type="submit">BUSCAR</button>
+                    <button id="btnBorrar" name="btnBorrar" class="boton" type="submit">BORRAR</button>
                 </td>
 
                 <tr>
@@ -207,7 +302,7 @@ if(isset($_POST['btnGuardar'])){
 
                 <td>
                     <label for="Departamento">Departamento:</label>
-                     <select name="Departamento" class="entradaS" required>
+                     <select name="Departamento" class="entradaS" required >
                         <option value="">Seleccione un Departamento</option>
                         <option value="ST">Subdirección técnica</option>
                         <option value="SA">Subdirección administrativa</option>
