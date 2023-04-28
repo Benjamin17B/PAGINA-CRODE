@@ -14,7 +14,7 @@
 			<li><a href="#">INICIO</a></li>
 			<li><a href="#">SERVICIOS</a>
 				<ul>
-					<li><a href="paginas/CPU'S.php">CPU'S</a></li>
+					<li><a href="paginas/MenuCpu.php">CPU'S</a></li>
 					<li><a href="#">IMPRESORAS</a></li>
 				</ul>
 			</li>
