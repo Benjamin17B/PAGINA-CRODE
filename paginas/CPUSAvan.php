@@ -11,7 +11,9 @@ if(isset($_POST['btnBuscar'])){
       }
       else{
         $sql = "SELECT * FROM datosequipo WHERE nombre = '$NUsuario'";
+        $sql3 = "SELECT * FROM area";
         $resultado = mysqli_query($cone, $sql);
+        $resultado3 = mysqli_query($cone, $sql3);
 
     if (mysqli_num_rows($resultado) > 0) {
         // Imprimir los resultados
@@ -34,13 +36,28 @@ if(isset($_POST['btnBuscar'])){
             $NEquipo = $fila['NEquipo'];
             $IP = $fila['IP'];
             $Mac = $fila['Mac'];
-           
-        
+            
             }   
         } else {
             echo "0 resultados";
+            }
+             //Obtener el Departamento
+        if (mysqli_num_rows($resultado3) > 0) {
+            // Imprimir los resultados
+            while($fila2 = mysqli_fetch_assoc($resultado3)) {
+    
+                $Departamento = $fila2['area'];
+                echo '<script>';
+                echo 'var select = document.getElementsByName("Departamento")[0];'; // obtener el primer elemento con name="color"
+                echo 'for (var i = 0; i < select.options.length; i++) {';
+                echo '  if (select.options[i].value == "' . $Departamento . '") {';
+                echo '    select.options[i].selected = true;';
+                echo '    break;';
+                echo '  }';
+                echo '}';
+                echo '</script>';
+                }   
             }   
-
       }  
 }
 if(isset($_POST['btnBorrar'])){
@@ -58,6 +75,123 @@ if(isset($_POST['btnBorrar'])){
   
 
       }  
+}
+if(isset($_POST['btnPDF'])){
+
+    include('../bd/bd.php');
+    $cone = conectar();
+    $sql = "SELECT iduser FROM datosequipo ORDER BY iduser DESC LIMIT 1";
+    $sql2 = "SELECT * FROM datosequipo";
+
+    $sql3 = "SELECT * FROM area";
+    
+    $resultado2 = $cone->query($sql);
+    $resultado = mysqli_query($cone, $sql2);
+    $resultado3 = mysqli_query($cone, $sql3);
+            
+    if ($resultado2->num_rows > 0) {
+      $fila = $resultado2->fetch_assoc();
+      $ultimo_id = $fila['iduser'];
+    } 
+    else {
+      $ultimo_id = 0;
+    }
+    
+    $nuevo_id = $ultimo_id + 1;
+
+    //Obtener los Datos para Agregar en el PDF
+    if (mysqli_num_rows($resultado) > 0) {
+        // Imprimir los resultados
+        while($fila = mysqli_fetch_assoc($resultado)) {
+
+            $NUsuario = $fila["nombre"];
+            $APMaterno = $fila['apellidoM'];
+            $APParteno = $fila['apellidoP'];
+            $Marca = $fila['marca'];
+            $Modelo = $fila['modelo'];
+            $numSerie = $fila['numserie'];
+            $numInventario = $fila['numInventario'];
+            $So = $fila['So'];
+            $Procesador = $fila['Procesador'];
+            $DiscoDuro = $fila['DiscoDuro'];
+            $Ram = $fila['Ram'];
+            $TipoMemoria = $fila['TipoMemoria'];
+            $Observaciones = $fila['Observaciones'];
+            $contraseña = $fila['contraseña'];
+            $NEquipo = $fila['NEquipo'];
+            $IP = $fila['IP'];
+            $Mac = $fila['Mac'];
+            
+            }   
+        }
+
+        //Obtener el Departamento
+        if (mysqli_num_rows($resultado3) > 0) {
+            // Imprimir los resultados
+            while($fila = mysqli_fetch_assoc($resultado3)) {
+    
+                $Departamento = $fila["area"];
+                
+                }   
+            }
+
+    
+    
+    require_once('../pdf/TCPDF/tcpdf.php');
+
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    
+    $pdf->SetMargins(10, 10, 10, true);
+    $pdf->AddPage();
+
+                        //Agregando los Datos al PDF
+
+    $pdf->SetFont('dejavusans', '', 12, '', true);
+    $pdf->Cell(0, 10, 'Número de registro: '.str_pad($nuevo_id, 6, '0', STR_PAD_LEFT), 0, 1, 'R');
+    $pdf->Cell(0, 10, 'Año actual: ' . date('Y'), 0, 1, 'R');
+    
+
+
+                        $pdf->SetFont('dejavusans', 'B', 15);
+                        $pdf->Cell(0, 10, 'DATOS  DEL EQUIPO: ', 0, 1, 'C');
+                        
+    $pdf->SetFont('dejavusans', '', 12, '', true);
+    $pdf->Cell(0, 10, 'Nombre: '.str_pad($NUsuario, STR_PAD_LEFT), 0, 1);
+    $pdf->Cell(0, 10, 'Apellido Materno: '.str_pad($APMaterno, STR_PAD_LEFT), 0, 1);
+    $pdf->Cell(0, 10, 'Apellido Paterno: '.str_pad($APParteno, STR_PAD_LEFT), 0, 1);
+    $pdf->Cell(0, 10, 'Marca: '.str_pad($Marca, STR_PAD_LEFT), 0, 1);
+    $pdf->Cell(0, 10, 'Modelo: '.str_pad($Modelo, STR_PAD_LEFT), 0, 1);
+    $pdf->Cell(0, 10, 'Número de Serie: '.str_pad($numSerie, STR_PAD_LEFT), 0, 1);
+    $pdf->Cell(0, 10, 'Número de Inventario: '.str_pad($numInventario, STR_PAD_LEFT), 0, 1);
+
+                        $pdf->SetFont('dejavusans', 'B', 15);
+                        $pdf->Cell(0, 10, 'DESEMPEÑO DEL EQUIPO: ', 0, 1, 'C');
+
+    $pdf->SetFont('dejavusans', '', 12, '', true);
+    $pdf->Cell(0, 10, 'SO: '.str_pad($So, STR_PAD_LEFT), 0, 1);
+    $pdf->Cell(0, 10, 'Procesador: '.str_pad($Procesador, STR_PAD_LEFT), 0, 1);
+    $pdf->Cell(0, 10, 'Disco Duro: '.str_pad($DiscoDuro, STR_PAD_LEFT), 0, 1);
+    $pdf->Cell(0, 10, 'Ram: '.str_pad($Ram, STR_PAD_LEFT), 0, 1);
+    $pdf->Cell(0, 10, 'Tipo de Memoria: '.str_pad($TipoMemoria, STR_PAD_LEFT), 0, 1);
+    $pdf->Cell(0, 10, 'Observaciones: '.str_pad($Observaciones, STR_PAD_LEFT), 0, 1);
+
+                        $pdf->SetFont('dejavusans', 'B', 15);
+                        $pdf->Cell(0, 10, 'DATOS DE LA RED: ', 0, 1, 'C');
+
+    $pdf->SetFont('dejavusans', '', 12, '', true);
+    $pdf->Cell(0, 10, 'Contraseña: '.str_pad($contraseña, STR_PAD_LEFT), 0, 1);
+    $pdf->Cell(0, 10, 'Nombre del Equipo: '.str_pad($NEquipo, STR_PAD_LEFT), 0, 1);
+    $pdf->Cell(0, 10, 'IP: '.str_pad($IP, STR_PAD_LEFT), 0, 1);
+    $pdf->Cell(0, 10, 'Mac: '.str_pad($Mac, STR_PAD_LEFT), 0, 1);
+
+                        $pdf->SetFont('dejavusans', 'B', 15);
+                        $pdf->Cell(0, 10, 'DEPARTAMENTO: ', 0, 1, 'C');
+
+    $pdf->SetFont('dejavusans', '', 12, '', true);
+    $pdf->Cell(0, 10, 'Departamento: '.str_pad($Departamento, STR_PAD_LEFT), 0, 1);
+    
+    $pdf->Output('Mantenimiento.pdf', 'D');
+
 }
 ?>
 <!DOCTYPE html>
@@ -168,7 +302,7 @@ if(isset($_POST['btnBorrar'])){
                     </label>
 
                     <label for="Observaciones">Observaciones:
-                    <input type="text" id="Observaciones"  name="Observaciones" class="CajonGrande" value="<?php if(isset($_POST['btnBuscar']))echo $Observaciones; ?>">
+                    <input type="text" id="Observaciones"  name="Observaciones" class="CajonGrande" disabled value="<?php if(isset($_POST['btnBuscar']))echo $Observaciones; ?>">
                     <span class="error"></span><br>
                     </label>
                 </td>
@@ -195,6 +329,8 @@ if(isset($_POST['btnBorrar'])){
 
                     <button id="btnBuscar" name="btnBuscar" class="boton" type="submit">BUSCAR</button>
                     <button id="btnBorrar" name="btnBorrar" class="boton" type="submit">BORRAR</button>
+                    <br><br><br>
+                    <button id="btnPDF" name="btnPDF" class="boton" type="submit">DESCARGAR PDF</button>
                 </td>
 
                 <tr>
@@ -205,7 +341,7 @@ if(isset($_POST['btnBorrar'])){
 
                 <td>
                     <label for="Departamento">Departamento:</label>
-                     <select name="Departamento" class="entradaS" disabled >
+                     <select name="Departamento" class="entradaS" disabled>
                         <option value="">Seleccione un Departamento</option>
                         <option value="ST">Subdirección técnica</option>
                         <option value="SA">Subdirección administrativa</option>
