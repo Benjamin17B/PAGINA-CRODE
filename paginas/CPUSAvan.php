@@ -47,15 +47,7 @@ if(isset($_POST['btnBuscar'])){
             while($fila2 = mysqli_fetch_assoc($resultado3)) {
     
                 $Departamento = $fila2['area'];
-                echo '<script>';
-                echo 'var select = document.getElementsByName("Departamento")[0];'; // obtener el primer elemento con name="color"
-                echo 'for (var i = 0; i < select.options.length; i++) {';
-                echo '  if (select.options[i].value == "' . $Departamento . '") {';
-                echo '    select.options[i].selected = true;';
-                echo '    break;';
-                echo '  }';
-                echo '}';
-                echo '</script>';
+               echo $Departamento;
                 }   
             }   
       }  
@@ -137,7 +129,7 @@ if(isset($_POST['btnPDF'])){
 
     
     
-    require_once('../pdf/TCPDF/tcpdf.php');
+    require_once('../pdf/tcpdf.php');
 
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     

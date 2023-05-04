@@ -32,7 +32,7 @@ if(isset($_POST['btnGuardar'])){
             $mensaje = "Error: Al consultar la BD...";
           }
           else{
-            $sql2 = "INSERT INTO area VALUES(NULL, 'Subdirección técnica', 20, 1, 'E010', '1 ', '1 ', '1 ', 84, 'ST')";
+            $sql2 = "INSERT INTO area VALUES(NULL, '$Departamento', 20, 1, 'E010', '1 ', '1 ', '1 ', 84, 'ST')";
             $sql = "INSERT INTO DatosEquipo VALUES(NULL,'$NUsuario','$APParteno','$APMaterno','$Marca','$Modelo','$numSerie','$numInventario',
             '$So','$Procesador','$DiscoDuro','$Ram','$TipoMemoria','$Observaciones','$contraseña','$NEquipo','$IP','$Mac')";
 
