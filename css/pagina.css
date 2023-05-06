@@ -208,7 +208,7 @@ footer > p{
 #formu label,.entrada{
   font-weight: 700;
   margin-left: 10px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
 }
 #formu .entrada{
   width: 150px;
@@ -250,7 +250,7 @@ footer > p{
 }
 #formu .entrada:valid, .CajonGrande:valid, .entradaS:valid{
   transition: 800ms;
-  color: #00BB03;
+  color: #000;
   border: 1px solid #00BB03;
 }
 #formu .entrada:invalid, .CajonGrande:invalid, .entradaS:invalid{
@@ -294,7 +294,8 @@ table{
 }
 tr{
   padding: 8px;
-  color: #669;
+  background-color: #FFF;
+  color: #000;
   border-top: 1px solid transparent;
 }
 th{
@@ -304,15 +305,10 @@ th{
   text-align: center;
 }
 td{
-  background-color: rgba(0, 0, 0, 0.1);
-  color: blue;
-  font-weight: 700;
-  text-align: justify;
-}
-tr:hover td{
-  transition: 500ms;
   background-color: #FFF;
   color: #000;
+  font-weight: 700;
+  text-align: justify;
 }
 caption{
   font-weight: bold;

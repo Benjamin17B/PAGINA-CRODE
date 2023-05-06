@@ -3,77 +3,111 @@ $mensaje = "";
 if(isset($_POST['btnBuscar'])){
     $NUsuario = $_POST['NUsuario'];
 
+     $APMaterno = "";
+     $APParteno = "";
+     $Marca = "";
+     $Modelo = "";
+     $numSerie = "";
+     $numInventario = "";
+     $So = "";
+     $Procesador = "";
+     $DiscoDuro = "";
+     $Ram = "";
+     $TipoMemoria = "";
+     $Observaciones = "";
+     $contraseña = "";
+     $NEquipo = "";
+     $IP = "";
+     $Mac = "";
 
-    include('../bd/bd.php');
-    $cone = conectar();
-    if ($cone == false) {
-        $mensaje = "Error: Falla en la conexion a la BD...";
-      }
-      else{
-        $sql = "SELECT * FROM datosequipo WHERE nombre = '$NUsuario'";
-        $sql3 = "SELECT * FROM area";
-        $resultado = mysqli_query($cone, $sql);
-        $resultado3 = mysqli_query($cone, $sql3);
-
-    if (mysqli_num_rows($resultado) > 0) {
-        // Imprimir los resultados
-        while($fila = mysqli_fetch_assoc($resultado)) {
-
-            $NUsuario = $fila["nombre"];
-            $APMaterno = $fila['apellidoM'];
-            $APParteno = $fila['apellidoP'];
-            $Marca = $fila['marca'];
-            $Modelo = $fila['modelo'];
-            $numSerie = $fila['numserie'];
-            $numInventario = $fila['numInventario'];
-            $So = $fila['So'];
-            $Procesador = $fila['Procesador'];
-            $DiscoDuro = $fila['DiscoDuro'];
-            $Ram = $fila['Ram'];
-            $TipoMemoria = $fila['TipoMemoria'];
-            $Observaciones = $fila['Observaciones'];
-            $contraseña = $fila['contraseña'];
-            $NEquipo = $fila['NEquipo'];
-            $IP = $fila['IP'];
-            $Mac = $fila['Mac'];
-            
-            }   
-        } else {
-            echo "0 resultados";
-            }
-             //Obtener el Departamento
-        if (mysqli_num_rows($resultado3) > 0) {
-            // Imprimir los resultados
-            while($fila2 = mysqli_fetch_assoc($resultado3)) {
+    if($NUsuario == ""){
+        $mensaje = "INGRESA EL NOMBRE DE USUARIO PARA DESCARGAR UN PDF";
+    }
+    else{
+        include('../bd/bd.php');
+        $cone = conectar();
+        if ($cone == false) {
+            $mensaje = "Error: Falla en la conexion a la BD...";
+          }
+          else{
+        
+            $sql = "SELECT * FROM datosequipo WHERE nombre = '$NUsuario'";
+            $sql3 = "SELECT * FROM area";
+            $resultado = mysqli_query($cone, $sql);
+            $resultado3 = mysqli_query($cone, $sql3);
     
-                $Departamento = $fila2['area'];
-               echo $Departamento;
+        if (mysqli_num_rows($resultado) > 0) {
+            // Imprimir los resultados
+            while($fila = mysqli_fetch_assoc($resultado)) {
+    
+                $NUsuario = $fila["nombre"];
+                $APMaterno = $fila['apellidoM'];
+                $APParteno = $fila['apellidoP'];
+                $Marca = $fila['marca'];
+                $Modelo = $fila['modelo'];
+                $numSerie = $fila['numserie'];
+                $numInventario = $fila['numInventario'];
+                $So = $fila['So'];
+                $Procesador = $fila['Procesador'];
+                $DiscoDuro = $fila['DiscoDuro'];
+                $Ram = $fila['Ram'];
+                $TipoMemoria = $fila['TipoMemoria'];
+                $Observaciones = $fila['Observaciones'];
+                $contraseña = $fila['contraseña'];
+                $NEquipo = $fila['NEquipo'];
+                $IP = $fila['IP'];
+                $Mac = $fila['Mac'];
+    
+                    //Obtener el Departamento
+                if (mysqli_num_rows($resultado3) > 0) {
+                    // Imprimir los resultados
+                    while($fila2 = mysqli_fetch_assoc($resultado3)) {
+            
+                        $Departamento = $fila2['area'];
+                        }   
+                    } 
+                
                 }   
-            }   
-      }  
+            } 
+            else {
+                $mensaje =  "El Usuario que buscaste No existe en la Base de Datos";
+            }
+        }  
+    }
 }
 if(isset($_POST['btnBorrar'])){
     $NUsuario = $_POST['NUsuario'];
+    if($NUsuario == ""){
+        $mensaje =  "Escribe el Nombre del Usuario a Borrar";
+    }
+    else{
+        include('../bd/bd.php');
+        $cone = conectar();
+        if ($cone == false) {
+            $mensaje = "Error: Falla en la conexion a la BD...";
+          }
+          else{
+            $sql = "DELETE FROM datosequipo WHERE nombre = '$NUsuario'";
+            mysqli_query($cone, $sql);
+            $mensaje = "Datos Borrados Correctamente";
+      
     
-    include('../bd/bd.php');
-    $cone = conectar();
-    if ($cone == false) {
-        $mensaje = "Error: Falla en la conexion a la BD...";
-      }
-      else{
-        $sql = "DELETE FROM datosequipo WHERE nombre = '$NUsuario";
-        mysqli_query($cone, $sql);
-        $mensaje = "Datos Borrados Correctamente";
-  
-
-      }  
+          }  
+    }
+   
 }
 if(isset($_POST['btnPDF'])){
+    $NUsuario = $_POST['NUsuario'];
+    if($NUsuario == ""){
+        $mensaje = "INGRESA EL NOMBRE DE USUARIO PARA DESCARGAR UN PDF";
+    }
+
+    else{
 
     include('../bd/bd.php');
     $cone = conectar();
     $sql = "SELECT iduser FROM datosequipo ORDER BY iduser DESC LIMIT 1";
-    $sql2 = "SELECT * FROM datosequipo";
+    $sql2 = "SELECT * FROM datosequipo WHERE nombre = '$NUsuario'";
 
     $sql3 = "SELECT * FROM area";
     
@@ -115,9 +149,7 @@ if(isset($_POST['btnPDF'])){
             $Mac = $fila['Mac'];
             
             }   
-        }
-
-        //Obtener el Departamento
+            //Obtener el Departamento
         if (mysqli_num_rows($resultado3) > 0) {
             // Imprimir los resultados
             while($fila = mysqli_fetch_assoc($resultado3)) {
@@ -126,64 +158,65 @@ if(isset($_POST['btnPDF'])){
                 
                 }   
             }
+            require_once('../pdf/tcpdf.php');
 
-    
-    
-    require_once('../pdf/tcpdf.php');
-
-    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-    
-    $pdf->SetMargins(10, 10, 10, true);
-    $pdf->AddPage();
-
-                        //Agregando los Datos al PDF
-
-    $pdf->SetFont('dejavusans', '', 12, '', true);
-    $pdf->Cell(0, 10, 'Número de registro: '.str_pad($nuevo_id, 6, '0', STR_PAD_LEFT), 0, 1, 'R');
-    $pdf->Cell(0, 10, 'Año actual: ' . date('Y'), 0, 1, 'R');
-    
-
-
-                        $pdf->SetFont('dejavusans', 'B', 15);
-                        $pdf->Cell(0, 10, 'DATOS  DEL EQUIPO: ', 0, 1, 'C');
-                        
-    $pdf->SetFont('dejavusans', '', 12, '', true);
-    $pdf->Cell(0, 10, 'Nombre: '.str_pad($NUsuario, STR_PAD_LEFT), 0, 1);
-    $pdf->Cell(0, 10, 'Apellido Materno: '.str_pad($APMaterno, STR_PAD_LEFT), 0, 1);
-    $pdf->Cell(0, 10, 'Apellido Paterno: '.str_pad($APParteno, STR_PAD_LEFT), 0, 1);
-    $pdf->Cell(0, 10, 'Marca: '.str_pad($Marca, STR_PAD_LEFT), 0, 1);
-    $pdf->Cell(0, 10, 'Modelo: '.str_pad($Modelo, STR_PAD_LEFT), 0, 1);
-    $pdf->Cell(0, 10, 'Número de Serie: '.str_pad($numSerie, STR_PAD_LEFT), 0, 1);
-    $pdf->Cell(0, 10, 'Número de Inventario: '.str_pad($numInventario, STR_PAD_LEFT), 0, 1);
-
-                        $pdf->SetFont('dejavusans', 'B', 15);
-                        $pdf->Cell(0, 10, 'DESEMPEÑO DEL EQUIPO: ', 0, 1, 'C');
-
-    $pdf->SetFont('dejavusans', '', 12, '', true);
-    $pdf->Cell(0, 10, 'SO: '.str_pad($So, STR_PAD_LEFT), 0, 1);
-    $pdf->Cell(0, 10, 'Procesador: '.str_pad($Procesador, STR_PAD_LEFT), 0, 1);
-    $pdf->Cell(0, 10, 'Disco Duro: '.str_pad($DiscoDuro, STR_PAD_LEFT), 0, 1);
-    $pdf->Cell(0, 10, 'Ram: '.str_pad($Ram, STR_PAD_LEFT), 0, 1);
-    $pdf->Cell(0, 10, 'Tipo de Memoria: '.str_pad($TipoMemoria, STR_PAD_LEFT), 0, 1);
-    $pdf->Cell(0, 10, 'Observaciones: '.str_pad($Observaciones, STR_PAD_LEFT), 0, 1);
-
-                        $pdf->SetFont('dejavusans', 'B', 15);
-                        $pdf->Cell(0, 10, 'DATOS DE LA RED: ', 0, 1, 'C');
-
-    $pdf->SetFont('dejavusans', '', 12, '', true);
-    $pdf->Cell(0, 10, 'Contraseña: '.str_pad($contraseña, STR_PAD_LEFT), 0, 1);
-    $pdf->Cell(0, 10, 'Nombre del Equipo: '.str_pad($NEquipo, STR_PAD_LEFT), 0, 1);
-    $pdf->Cell(0, 10, 'IP: '.str_pad($IP, STR_PAD_LEFT), 0, 1);
-    $pdf->Cell(0, 10, 'Mac: '.str_pad($Mac, STR_PAD_LEFT), 0, 1);
-
-                        $pdf->SetFont('dejavusans', 'B', 15);
-                        $pdf->Cell(0, 10, 'DEPARTAMENTO: ', 0, 1, 'C');
-
-    $pdf->SetFont('dejavusans', '', 12, '', true);
-    $pdf->Cell(0, 10, 'Departamento: '.str_pad($Departamento, STR_PAD_LEFT), 0, 1);
-    
-    $pdf->Output('Mantenimiento.pdf', 'D');
-
+            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+            
+            $pdf->SetMargins(10, 10, 10, true);
+            $pdf->AddPage();
+        
+                                //Agregando los Datos al PDF
+        
+            $pdf->SetFont('dejavusans', '', 12, '', true);
+            $pdf->Cell(0, 10, 'Número de registro: '.str_pad($nuevo_id, 6, '0', STR_PAD_LEFT), 0, 1, 'R');
+            $pdf->Cell(0, 10, 'Año actual: ' . date('Y'), 0, 1, 'R');
+            
+        
+        
+                                $pdf->SetFont('dejavusans', 'B', 15);
+                                $pdf->Cell(0, 10, 'DATOS  DEL EQUIPO: ', 0, 1, 'C');
+                                
+            $pdf->SetFont('dejavusans', '', 12, '', true);
+            $pdf->Cell(0, 10, 'Nombre: '.str_pad($NUsuario, STR_PAD_LEFT), 0, 1);
+            $pdf->Cell(0, 10, 'Apellido Materno: '.str_pad($APMaterno, STR_PAD_LEFT), 0, 1);
+            $pdf->Cell(0, 10, 'Apellido Paterno: '.str_pad($APParteno, STR_PAD_LEFT), 0, 1);
+            $pdf->Cell(0, 10, 'Marca: '.str_pad($Marca, STR_PAD_LEFT), 0, 1);
+            $pdf->Cell(0, 10, 'Modelo: '.str_pad($Modelo, STR_PAD_LEFT), 0, 1);
+            $pdf->Cell(0, 10, 'Número de Serie: '.str_pad($numSerie, STR_PAD_LEFT), 0, 1);
+            $pdf->Cell(0, 10, 'Número de Inventario: '.str_pad($numInventario, STR_PAD_LEFT), 0, 1);
+        
+                                $pdf->SetFont('dejavusans', 'B', 15);
+                                $pdf->Cell(0, 10, 'DESEMPEÑO DEL EQUIPO: ', 0, 1, 'C');
+        
+            $pdf->SetFont('dejavusans', '', 12, '', true);
+            $pdf->Cell(0, 10, 'SO: '.str_pad($So, STR_PAD_LEFT), 0, 1);
+            $pdf->Cell(0, 10, 'Procesador: '.str_pad($Procesador, STR_PAD_LEFT), 0, 1);
+            $pdf->Cell(0, 10, 'Disco Duro: '.str_pad($DiscoDuro, STR_PAD_LEFT), 0, 1);
+            $pdf->Cell(0, 10, 'Ram: '.str_pad($Ram, STR_PAD_LEFT), 0, 1);
+            $pdf->Cell(0, 10, 'Tipo de Memoria: '.str_pad($TipoMemoria, STR_PAD_LEFT), 0, 1);
+            $pdf->Cell(0, 10, 'Observaciones: '.str_pad($Observaciones, STR_PAD_LEFT), 0, 1);
+        
+                                $pdf->SetFont('dejavusans', 'B', 15);
+                                $pdf->Cell(0, 10, 'DATOS DE LA RED: ', 0, 1, 'C');
+        
+            $pdf->SetFont('dejavusans', '', 12, '', true);
+            $pdf->Cell(0, 10, 'Contraseña: '.str_pad($contraseña, STR_PAD_LEFT), 0, 1);
+            $pdf->Cell(0, 10, 'Nombre del Equipo: '.str_pad($NEquipo, STR_PAD_LEFT), 0, 1);
+            $pdf->Cell(0, 10, 'IP: '.str_pad($IP, STR_PAD_LEFT), 0, 1);
+            $pdf->Cell(0, 10, 'Mac: '.str_pad($Mac, STR_PAD_LEFT), 0, 1);
+        
+                                $pdf->SetFont('dejavusans', 'B', 15);
+                                $pdf->Cell(0, 10, 'DEPARTAMENTO: ', 0, 1, 'C');
+        
+            $pdf->SetFont('dejavusans', '', 12, '', true);
+            $pdf->Cell(0, 10, 'Departamento: '.str_pad($Departamento, STR_PAD_LEFT), 0, 1);
+            
+            $pdf->Output('Mantenimiento.pdf', 'D');
+        }
+        else{
+            $mensaje =  "El usuario no Existe";
+        } 
+    }
 }
 ?>
 <!DOCTYPE html>
