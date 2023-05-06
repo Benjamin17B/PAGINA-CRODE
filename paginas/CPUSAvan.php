@@ -21,7 +21,7 @@ if(isset($_POST['btnBuscar'])){
      $Mac = "";
 
     if($NUsuario == ""){
-        $mensaje = "INGRESA EL NOMBRE DE USUARIO PARA DESCARGAR UN PDF";
+        $mensaje = "INGRESA EL NOMBRE DE USUARIO";
     }
     else{
         include('../bd/bd.php');
@@ -76,13 +76,21 @@ if(isset($_POST['btnBuscar'])){
     }
 }
 if(isset($_POST['btnBorrar'])){
+    include('../bd/bd.php');
+    $cone = conectar();
     $NUsuario = $_POST['NUsuario'];
+    $sql = "SELECT * FROM datosequipo WHERE nombre = '$NUsuario'";
+    $resultado = mysqli_query($cone, $sql);
+    
     if($NUsuario == ""){
         $mensaje =  "Escribe el Nombre del Usuario a Borrar";
     }
+    else if(mysqli_num_rows($resultado) == 0) {
+        $mensaje =  "El Usuario Que Quieres Borrar No Existe en la Base de Datos";
+    }
     else{
-        include('../bd/bd.php');
-        $cone = conectar();
+
+       
         if ($cone == false) {
             $mensaje = "Error: Falla en la conexion a la BD...";
           }
