@@ -89,7 +89,7 @@ if(isset($_POST['btnPDF'])){
       $ultimo_id = 0;
     }
     
-    $nuevo_id = $ultimo_id + 1;
+    $nuevo_id = $ultimo_id;
 
     //Obtener los Datos para Agregar en el PDF
     if (mysqli_num_rows($resultado) > 0) {
