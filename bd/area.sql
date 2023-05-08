@@ -62,22 +62,6 @@ CREATE TABLE area (
   PRIMARY KEY (idarea),
   FOREIGN KEY (iduser) REFERENCES DatosEquipo(iduser)
 );
-CREATE TABLE area (
-  idarea INT AUTO_INCREMENT NOT NULL,
-  iduser INT,
-  area VARCHAR(100),
-  nivel INT,
-  idareapadre INT,
-  pp CHAR(4),
-  pe CHAR(2),
-  pea CHAR(2),
-  pc CHAR(2),
-  ridusuario INT,
-  abreviatura VARCHAR(10),
-  PRIMARY KEY (idarea),
-  FOREIGN KEY (iduser) REFERENCES DatosEquipo(iduser)
-);
-
 
 INSERT INTO area(idarea, area, nivel, idareapadre, pp, pe, pea, pc, ridusuario, abreviatura) VALUES (2, 'Subdirección técnica', 20, 1, 'E010', '1 ', '1 ', '1 ', 84, 'ST');
 INSERT INTO area(idarea, area, nivel, idareapadre, pp, pe, pea, pc, ridusuario, abreviatura) VALUES (3, 'Subdirección administrativa', 20, 1, 'E010', '5 ', '5 ', '1 ', 6, 'SSA');

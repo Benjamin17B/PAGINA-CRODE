@@ -95,12 +95,25 @@ if(isset($_POST['btnBorrar'])){
             $mensaje = "Error: Falla en la conexion a la BD...";
           }
           else{
-            $sql = "DELETE FROM datosequipo WHERE nombre = '$NUsuario'";
-            mysqli_query($cone, $sql);
-            $mensaje = "Datos Borrados Correctamente";
-      
-    
-          }  
+                // Eliminar los registros de la tabla area que referencian a las filas que se desean eliminar de la tabla DatosEquipo
+                $sql = "DELETE FROM area WHERE iduser IN (SELECT iduser FROM DatosEquipo WHERE nombre = '$NUsuario')";
+
+                if (mysqli_query($cone, $sql)) {
+                    // Si se eliminaron las filas de la tabla area, se pueden eliminar las filas de la tabla DatosEquipo
+                    $sql = "DELETE FROM DatosEquipo WHERE nombre = '$NUsuario'";
+
+                    if (mysqli_query($cone, $sql)) {
+                        echo "Registros eliminados correctamente.";
+                    } else {
+                        echo "Error al eliminar registros: " . mysqli_error($cone);
+                    }
+                } else {
+                    echo "Error al eliminar registros: " . mysqli_error($cone);
+                }
+
+                // Cerrar la conexión a la base de datos
+                mysqli_close($cone);
+          }
     }
    
 }
