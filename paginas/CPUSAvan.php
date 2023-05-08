@@ -178,7 +178,8 @@ if(isset($_POST['btnPDF'])){
                 $Departamento = $fila["area"];
                 
                 }   
-            }
+            } 
+
             require_once('../pdf/tcpdf.php');
 
             $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -231,8 +232,15 @@ if(isset($_POST['btnPDF'])){
         
             $pdf->SetFont('dejavusans', '', 12, '', true);
             $pdf->Cell(0, 10, 'Departamento: '.str_pad($Departamento, STR_PAD_LEFT), 0, 1);
+
+                                $pdf->SetFont('dejavusans', 'B', 15);
+                                $pdf->Cell(0, 10, 'CODIGO DE BARRAS: ', 0, 1, 'C');
+        
+           
             
             $pdf->Output('Mantenimiento.pdf', 'D');
+
+
         }
         else{
             $mensaje =  "El usuario no Existe";
@@ -405,7 +413,6 @@ if(isset($_POST['btnPDF'])){
                         <option value="AM" <?php if ($Departamento == 'AM') echo 'selected'; ?>>Administración de la Calidad</option>
                         <option value="NA" <?php if ($Departamento == 'NA') echo 'selected'; ?>>ninguna</option>
                     </select>
-
                     <br><br>
                 </td>
                
