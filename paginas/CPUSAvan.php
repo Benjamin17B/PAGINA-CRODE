@@ -374,24 +374,25 @@ if(isset($_POST['btnPDF'])){
 
                 <td>
                     <label for="Departamento">Departamento:</label>
-                     <select name="Departamento" class="entradaS" disabled>
+                    <select name="Departamento" class="entradaS" disabled>
                         <option value="">Seleccione un Departamento</option>
-                        <option value="ST">Subdirección técnica</option>
-                        <option value="SA">Subdirección administrativa</option>
-                        <option value="RMS">Recursos materiales y de servicios</option>
-                        <option value="RM">Recursos humanos</option>
-                        <option value="RF">Recursos financieros</option>
-                        <option value="PRO">Producción</option>
-                        <option value="PPP">Planeación, Programación y Presupuestación</option>
-                        <option value="MTG">Metrologia</option>
-                        <option value="GTV">Gestión tecnológica y vinculación</option>
-                        <option value="DDE">Diseño y Desarrollo de Equipo</option>
-                        <option value="DIR">Dirección</option>
-                        <option value="CIT">Centro de información técnica</option>
-                        <option value="ATM">Asistencia técnica y mantenimiento</option>
-                        <option value="AM">Administración de la Calidad</option>
-                        <option value="NA">ninguna</option>
+                        <option value="ST" <?php if ($Departamento == 'ST') echo 'selected'; ?>>Subdirección técnica</option>
+                        <option value="SA" <?php if ($Departamento == 'SA') echo 'selected'; ?>>Subdirección administrativa</option>
+                        <option value="RMS" <?php if ($Departamento == 'RMS') echo 'selected'; ?>>Recursos materiales y de servicios</option>
+                        <option value="RM" <?php if ($Departamento == 'RM') echo 'selected'; ?>>Recursos humanos</option>
+                        <option value="RF" <?php if ($Departamento == 'RF') echo 'selected'; ?>>Recursos financieros</option>
+                        <option value="PRO" <?php if ($Departamento == 'PRO') echo 'selected'; ?>>Producción</option>
+                        <option value="PPP" <?php if ($Departamento == 'PPP') echo 'selected'; ?>>Planeación, Programación y Presupuestación</option>
+                        <option value="MTG" <?php if ($Departamento == 'MTG') echo 'selected'; ?>>Metrologia</option>
+                        <option value="GTV" <?php if ($Departamento == 'GTV') echo 'selected'; ?>>Gestión tecnológica y vinculación</option>
+                        <option value="DDE" <?php if ($Departamento == 'DDE') echo 'selected'; ?>>Diseño y Desarrollo de Equipo</option>
+                        <option value="DIR" <?php if ($Departamento == 'DIR') echo 'selected'; ?>>Dirección</option>
+                        <option value="CIT" <?php if ($Departamento == 'CIT') echo 'selected'; ?>>Centro de información técnica</option>
+                        <option value="ATM" <?php if ($Departamento == 'ATM') echo 'selected'; ?>>Asistencia técnica y mantenimiento</option>
+                        <option value="AM" <?php if ($Departamento == 'AM') echo 'selected'; ?>>Administración de la Calidad</option>
+                        <option value="NA" <?php if ($Departamento == 'NA') echo 'selected'; ?>>ninguna</option>
                     </select>
+
                     <br><br>
                 </td>
                
