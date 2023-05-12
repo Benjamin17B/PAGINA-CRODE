@@ -21,7 +21,7 @@ if(isset($_POST['btnBuscar'])){
      $Mac = "";
 
     if($NUsuario == ""){
-        $mensaje = "INGRESA EL NOMBRE DE USUARIO";
+        $mensaje = "Ingresa el Nombre de Usuario.";
     }
     else{
         include('../bd/bd.php');
@@ -120,7 +120,7 @@ if(isset($_POST['btnBorrar'])){
 if(isset($_POST['btnPDF'])){
     $NUsuario = $_POST['NUsuario'];
     if($NUsuario == ""){
-        $mensaje = "INGRESA EL NOMBRE DE USUARIO PARA DESCARGAR UN PDF";
+        $mensaje = "Ingresa el Nombre de Usuario para Descargar un PDF.";
     }
 
     else{
@@ -182,6 +182,7 @@ if(isset($_POST['btnPDF'])){
 
             require_once('../pdf/tcpdf.php');
 
+
             $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
             
             $pdf->SetMargins(10, 10, 10, true);
@@ -233,14 +234,14 @@ if(isset($_POST['btnPDF'])){
             $pdf->SetFont('dejavusans', '', 12, '', true);
             $pdf->Cell(0, 10, 'Departamento: '.str_pad($Departamento, STR_PAD_LEFT), 0, 1);
 
-                                $pdf->SetFont('dejavusans', 'B', 15);
-                                $pdf->Cell(0, 10, 'CODIGO DE BARRAS: ', 0, 1, 'C');
+                        
+            $pdf->AddPage();
+
+            $pdf->write1DBarcode($nuevo_id, 'C128', '', '', 80, 15, 0.4, $style = array('position' => 'S', 'border' => 0, 'padding' => 0, 'fontsize' => 8, 'text' => true, 'stretchtext' => 0, 'align' => 'C'), 'N');
+
+          
         
-           
-            
             $pdf->Output('Mantenimiento.pdf', 'D');
-
-
         }
         else{
             $mensaje =  "El usuario no Existe";
@@ -418,9 +419,13 @@ if(isset($_POST['btnPDF'])){
                
             </table><br>
             <?php
-                if ($mensaje!="") {
-                    echo "<span class='error'>$mensaje</span>'";
+                if ($mensaje != "") {
+                echo "<div style='background-color: #f2dede; border: 1px solid #ebccd1; border-radius: 5px; padding: 10px; display: inline-block;'>";
+                echo "<span style='color: #a94442; font-size: 24px; margin-right: 10px;'>&#10006;</span>";
+                echo "<span style='color: #a94442; font-size: 18px;'>$mensaje</span>";
+                echo "</div>";
                 }
+                    
             ?>
         </form>
     </section>

@@ -25,7 +25,6 @@ if(isset($_POST['btnGuardar'])){
     if ($cone == false) {
         $mensaje = "Error: Falla en la conexion a la BD...";
       }else{
-        echo "conexion exitosa";
         $sql = "SELECT * FROM DatosEquipo WHERE (nombre = '$NUsuario')";
         $rs = consulta($sql,$cone);
         if ($rs == false) {
@@ -48,7 +47,7 @@ if(isset($_POST['btnGuardar'])){
                 
                
                 if (operacion($sql,$cone)) {
-                  $mensaje = "Registro con exito!!!";
+                  $mensaje = "¡Datos registrados correctamente!";
                 }
                 else {
                   $mensaje = "Error: Al registrar los datos ";
@@ -234,8 +233,18 @@ if(isset($_POST['btnGuardar'])){
                
             </table><br>
             <?php
-                if ($mensaje!="") {
-                    echo "<span class='error'>$mensaje</span>'";
+                if ($mensaje == "¡Datos registrados correctamente!") {
+                echo '<div style="position: absolute ; top: 50%; left: 50%; transform: translate(50%, 800%); 
+                background-color: #f2f2f2; border: 1px solid #ddd; border-radius: 5px; padding: 10px; display: inline-block;">';
+                echo '<span style="color: #4CAF50; font-size: 24px; margin-right: 10px;">&#10004;</span>';
+                
+                echo '<span style="color: #333; font-size: 18px;">¡Datos registrados correctamente!</span>';
+                echo '</div>';
+                }else{
+                    echo '<div style="background-color: #f2dede; border: 1px solid #ebccd1; border-radius: 5px; padding: 10px; display: inline-block;">';
+                    echo '<span style="color: #a94442; font-size: 24px; margin-right: 10px;">&#10006;</span>';
+                    echo '<span style="color: #a94442; font-size: 18px;">Llena todo el registro.</span>';
+                    echo '</div>';
                 }
             ?>
         </form>
