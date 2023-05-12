@@ -237,6 +237,10 @@ if(isset($_POST['btnPDF'])){
                         
             $pdf->AddPage();
 
+                                $pdf->SetFont('dejavusans', 'B', 15);
+                                $pdf->Cell(0, 10, 'CODIGO DE BARRAS: ', 0, 1, 'C');
+            
+            $pdf->SetFont('dejavusans', '', 12, '', true);
             $pdf->write1DBarcode($nuevo_id, 'C128', '', '', 80, 15, 0.4, $style = array('position' => 'S', 'border' => 0, 'padding' => 0, 'fontsize' => 8, 'text' => true, 'stretchtext' => 0, 'align' => 'C'), 'N');
 
           
