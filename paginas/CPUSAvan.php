@@ -103,12 +103,12 @@ if(isset($_POST['btnBorrar'])){
                     $sql = "DELETE FROM DatosEquipo WHERE nombre = '$NUsuario'";
 
                     if (mysqli_query($cone, $sql)) {
-                        echo "Registros eliminados correctamente.";
+                        $mensaje = "¡Registros eliminados correctamente.!";
                     } else {
-                        echo "Error al eliminar registros: " . mysqli_error($cone);
+                        $mensaje =  "Error al eliminar registros: " . mysqli_error($cone);
                     }
                 } else {
-                    echo "Error al eliminar registros: " . mysqli_error($cone);
+                    $mensaje =  "Error al eliminar registros: " . mysqli_error($cone);
                 }
 
                 // Cerrar la conexión a la base de datos
@@ -423,13 +423,20 @@ if(isset($_POST['btnPDF'])){
                
             </table><br>
             <?php
-                if ($mensaje != "") {
-                echo "<div style='background-color: #f2dede; border: 1px solid #ebccd1; border-radius: 5px; padding: 10px; display: inline-block;'>";
-                echo "<span style='color: #a94442; font-size: 24px; margin-right: 10px;'>&#10006;</span>";
-                echo "<span style='color: #a94442; font-size: 18px;'>$mensaje</span>";
-                echo "</div>";
-                }
+                if ($mensaje == "¡Registros eliminados correctamente.!") {
+                    echo '<div style="position: absolute ; top: 50%; left: 50%; transform: translate(50%, 800%); 
+                    background-color: #f2f2f2; border: 1px solid #ddd; border-radius: 5px; padding: 10px; display: inline-block;">';
+                    echo '<span style="color: #4CAF50; font-size: 24px; margin-right: 10px;">&#10004;</span>';
                     
+                    echo "<span style='color: #333; font-size: 18px;'>$mensaje</span>";
+                    echo '</div>';
+                    }
+                    else {
+                        echo "<div style='background-color: #f2dede; border: 1px solid #ebccd1; border-radius: 5px; padding: 10px; display: inline-block;'>";
+                        echo "<span style='color: #a94442; font-size: 24px; margin-right: 10px;'>&#10006;</span>";
+                        echo "<span style='color: #a94442; font-size: 18px;'>$mensaje</span>";
+                        echo "</div>";
+                    } 
             ?>
         </form>
     </section>
