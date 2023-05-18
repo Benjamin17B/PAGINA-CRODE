@@ -128,7 +128,11 @@ if(isset($_POST['btnPDF'])){
         include('../bd/bd.php');
         $cone = conectar();
         $sql = "SELECT iduser FROM datosequipo ORDER BY iduser DESC LIMIT 1";
+<<<<<<< HEAD
         $sql2 = "SELECT * FROM datosequipo WHERE iduser = '$ID'";
+=======
+        $sql2 = "SELECT * FROM datosequipo WHERE nombre = '$NUsuario'";
+>>>>>>> 2d6791803e62b45bba2b1fca975aaa85c2555988
 
         $sql3 = "SELECT * FROM area";
         
@@ -239,7 +243,11 @@ if(isset($_POST['btnPDF'])){
 
                                     $pdf->SetFont('dejavusans', 'B', 15);
                                     $pdf->Cell(0, 10, 'CODIGO DE BARRAS: ', 0, 1, 'C');
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> 2d6791803e62b45bba2b1fca975aaa85c2555988
                 $pdf->SetFont('dejavusans', '', 12, '', true);
 
                 // Obtener las dimensiones del código de barras
@@ -253,6 +261,10 @@ if(isset($_POST['btnPDF'])){
                 $pdf->write1DBarcode($nuevo_id, 'C128', $x, '', $barcodeWidth, $barcodeHeight, 0.4, $style = array('position' => 'S', 'border' => 0, 'padding' => 0, 'fontsize' => 8, 'text' => true, 'stretchtext' => 0, 'align' => 'C'), 'N');
                                     
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2d6791803e62b45bba2b1fca975aaa85c2555988
                 $pdf->Output('Mantenimiento.pdf', 'D');
         }
         else{
@@ -378,6 +390,7 @@ if(isset($_POST['btnPDF'])){
                     <span class="error"></span><br>
                     </label>
                 </td>
+                
                 <td> 
                     <label for="contraseña">Contraseña:
                     <input type="password" id="contraseña"  name="contraseña" class="entrada" disabled value="<?php if(isset($_POST['btnBuscar']))echo $contraseña; ?>">
@@ -460,5 +473,3 @@ if(isset($_POST['btnPDF'])){
 </footer>
 </body>
 </html>
-
-<!-- localhost:8017/PRACTICA/paginas/CPU'S.php -->
