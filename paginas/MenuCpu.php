@@ -34,8 +34,8 @@ if(isset($_POST['btnCPUAvan'])){
         <section>
             <table>
                 <tr>
-                    <td><h1>GUARDAR</h1></td>
-                    <td><h1>AVANZADA</h1></td>
+                    <td><h1> <i>GUARDAR</i> </h1></td>
+                    <td><h1> <i> OPCIONES AVANZADAS</i> </h1></td>
                 </tr>
                 
            <td>

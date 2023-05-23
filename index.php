@@ -23,8 +23,37 @@
 <body>
     <main>
         <section>
-            <img src="img/crode.png" class="imagen">
-        </section>
+            <img src="img/registro.png" class="imagen">
+            <h1>OBJETIVO</h1>
+            <p>Nuestro sitio web de registro de mantenimiento de servicios ofrece una forma fácil y eficiente 
+                de documentar y realizar un seguimiento de todas las actividades de mantenimiento relacionadas
+                 con los servicios que ofrecemos.Permite a los usuarios ingresar información relevante sobre 
+                 los servicios y las tareas de mantenimiento, como la descripción del problema, la fecha y la 
+                 hora de inicio y finalización, el técnico asignado, entre otros detalles.</p><br>
+
+            <h1>¿Cómo Utilizarla?</h1>
+            <p>1.- <b>Acceso a la pagina:</b> Para acceder al registro de mantenimiento de servicios, simplemente selecciona la opción 
+                "Servicios" en el menú de navegación ubicado en la parte superior de la página. 
+                Esto te llevará a la sección de mantenimiento.</p><br>
+
+            <p>2.- <b>Selección del servicio:</b> Una vez que estés en la sección de mantenimiento, encontrarás una lista desplegable con todos los 
+                servicios disponibles. Selecciona el servicio específico para el cual deseas registrar el mantenimiento. Despues de esto apareceran dos opciones 
+            la opcion de <b>Guardar</b> y la de <b>Opciones Avanzadas</b> elija la que más necesite</p><br>
+       
+            <p>3.- <b>Registro de Mantenimiento:</b> Completa los campos proporcionados para registrar los detalles del
+            mantenimiento. Esto puede incluir la descripción del problema, nombre del equipo, nombre de usuario, etc.</p><br>
+                 
+            <p>4.- <b>Guardar y enviar:</b>  Una vez que hayas ingresado todos los detalles necesarios, haz 
+            clic en el botón "Guardar" o "Enviar" para almacenar la información en nuestro sistema.</p><br>
+
+            <p>¡Listo! Ahora estás completamente equipado para utilizar nuestro sistema de registro de 
+                mantenimiento de servicios de manera efectiva. Recuerda que puedes acceder a esta 
+                funcionalidad a través del menú de navegación en cualquier momento.</p><br>
+
+            <p>¡Gracias por tu atención! Si tienes alguna pregunta o necesitas asistencia adicional, no dudes 
+                en ponerte en contacto con nuestro equipo de soporte. ¡Estaremos encantados de ayudarte!</p><br>
+
+            </section>
     </main>
     <footer>
 
