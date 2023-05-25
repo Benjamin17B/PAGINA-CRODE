@@ -10,7 +10,7 @@ CREATE TABLE DatosEquipo(
   apellidoM VARCHAR(30) NOT NULL,
   marca VARCHAR(30) NOT NULL,
   modelo VARCHAR(30) NOT NULL,
-  numserie INT(5) NOT NULL,
+  numserie VARCHAR(15) NOT NULL,
   numInventario INT(5) NOT NULL,
   So VARCHAR(30) NOT NULL,
   Procesador VARCHAR(30) NOT NULL,
@@ -21,7 +21,8 @@ CREATE TABLE DatosEquipo(
   contraseña VARCHAR(30) NOT NULL,
   NEquipo VARCHAR(30) NOT NULL,
   IP VARCHAR(30) NOT NULL,
-  Mac VARCHAR(30) NOT NULL
+  Mac VARCHAR(30) NOT NULL,
+  Departamento VARCHAR(100)
   );
 
   /*  DEPARTAMENTO  */

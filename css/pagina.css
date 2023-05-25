@@ -9,14 +9,14 @@ body{
   width: 900px;
   margin: auto;
 }
-header, footer{
+header{
   box-sizing: border-box;
   border-top: 2px solid #FFFFFF;
   border-bottom: 2px solid #FFFFFF;
-  height: 150px;
-  padding-top: 30px;
+  height: 100px;
+  padding-top: 25px;
   width: 100%;
-  background-color: #7e7c7c;
+  background-color: #0f98bb;
 }
 header > h1{
   float: none;
@@ -103,7 +103,7 @@ main{
   width: 100%;
   padding-bottom: 30px;
   padding-top: 30px;
-  background-color: #fff1c4;
+  background-color: #DCE5F4;
 }
 section{
   width: 1200px;

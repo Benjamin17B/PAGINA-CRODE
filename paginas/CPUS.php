@@ -33,7 +33,7 @@ if(isset($_POST['btnGuardar'])){
           else{
         
             $sql = "INSERT INTO DatosEquipo VALUES(NULL,'$NUsuario','$APParteno','$APMaterno','$Marca','$Modelo','$numSerie','$numInventario',
-            '$So','$Procesador','$DiscoDuro','$Ram','$TipoMemoria','$Observaciones','$contraseña','$NEquipo','$IP','$Mac')";
+            '$So','$Procesador','$DiscoDuro','$Ram','$TipoMemoria','$Observaciones','$contraseña','$NEquipo','$IP','$Mac','$Departamento')";
 
             if (operacion($sql,$cone) == true) {
                 $sql = "SELECT * FROM DatosEquipo WHERE nombre = '$NUsuario'";
@@ -43,7 +43,6 @@ if(isset($_POST['btnGuardar'])){
                 /* ↓ Muestra datos ↓
                     echo "$datos";*/
                 
-                    $sql2 = "INSERT INTO area (iduser,area) VALUES('$id','$Departamento')";
                 
                
                 if (operacion($sql,$cone)) {
@@ -55,9 +54,6 @@ if(isset($_POST['btnGuardar'])){
               }
               else {
                 $mensaje = "Error: Al gurdar los datos...";
-              }
-              if(operacion($sql2,$cone)){
-                $sql2 = "SELECT * FROM DatosEquipo WHERE área = '$Departamento'";
               }
         }
         mysqli_close($cone);
@@ -136,7 +132,7 @@ if(isset($_POST['btnGuardar'])){
                     </label>
 
                     <label for="numSerie">Numero de Serie:
-                    <input type="number" id="numSerie" name="numSerie" class="entrada" pattern="[0-9]+" required>
+                    <input type="text" id="numSerie" name="numSerie" class="entrada" pattern="[0-9,A-Z]+" required>
                     <span class="error"></span><br>
                     </label>
 

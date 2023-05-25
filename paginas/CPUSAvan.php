@@ -1,4 +1,21 @@
 <?php
+$listDepartamentos=[
+'ST'=>"Subdirección técnica",
+'SA'=>"Subdirección administrativa",
+'RMS'=>"Recursos materiales y de servicios",
+'RM'=>"Recursos humanos",
+'RF'=>"Recursos financieros",
+'PRO'=>"Producción",
+'PPP'=>"Planeación, Programación y Presupuestación",
+'MTG'=>"Metrologia",
+'GTV'=>"Gestión tecnológica y vinculación",
+'DDE'=>"Diseño y Desarrollo de Equipo",
+'DIR'=>"Dirección",
+'CIT'=>"Centro de información técnica",
+'ATM'=>"Asistencia técnica y mantenimiento",
+'AM'=>"Administración de la Calidad",
+'NA'=>"ninguna"
+];
 $mensaje = "";
 if(isset($_POST['btnBuscar'])){
     $ID = $_POST['ID'];
@@ -33,10 +50,8 @@ if(isset($_POST['btnBuscar'])){
           else{
         
             $sql = "SELECT * FROM datosequipo WHERE iduser = '$ID'";
-            $sql3 = "SELECT * FROM area";
             $resultado = mysqli_query($cone, $sql);
-            $resultado3 = mysqli_query($cone, $sql3);
-    
+        
         if (mysqli_num_rows($resultado) > 0) {
             // Imprimir los resultados
             while($fila = mysqli_fetch_assoc($resultado)) {
@@ -58,16 +73,9 @@ if(isset($_POST['btnBuscar'])){
                 $NEquipo = $fila['NEquipo'];
                 $IP = $fila['IP'];
                 $Mac = $fila['Mac'];
+                $Departamento = $fila['Departamento'];
                 
                 $mensaje ="¡Registros Encontrados Correctamente.!";
-                    //Obtener el Departamento
-                if (mysqli_num_rows($resultado3) > 0) {
-                    // Imprimir los resultados
-                    while($fila2 = mysqli_fetch_assoc($resultado3)) {
-            
-                        $Departamento = $fila2['area'];
-                        }   
-                    } 
                 }   
             } 
             else {
@@ -76,48 +84,37 @@ if(isset($_POST['btnBuscar'])){
         }  
     }
 }
-if(isset($_POST['btnBorrar'])){
+if (isset($_POST['btnBorrar'])) {
     include('../bd/bd.php');
     $cone = conectar();
     $ID = $_POST['ID'];
     $sql = "SELECT * FROM datosequipo WHERE iduser = '$ID'";
     $resultado = mysqli_query($cone, $sql);
-    
-    if($ID == ""){
+
+    if ($ID == "") {
         $mensaje =  "Escribe el ID del Usuario a Borrar";
-    }
-    else if(mysqli_num_rows($resultado) == 0) {
+    } else if (mysqli_num_rows($resultado) == 0) {
         $mensaje =  "El ID Que Quieres Borrar No Existe en la Base de Datos";
-    }
-    else{
-
-       
+    } else {
         if ($cone == false) {
-            $mensaje = "Error: Falla en la conexion a la BD...";
-          }
-          else{
-                // Eliminar los registros de la tabla area que referencian a las filas que se desean eliminar de la tabla DatosEquipo
-                $sql = "DELETE FROM area WHERE iduser IN (SELECT iduser FROM DatosEquipo WHERE iduser = '$ID')";
-
-                if (mysqli_query($cone, $sql)) {
-                    // Si se eliminaron las filas de la tabla area, se pueden eliminar las filas de la tabla DatosEquipo
-                    $sql = "DELETE FROM DatosEquipo WHERE iduser = '$ID'";
-
-                    if (mysqli_query($cone, $sql)) {
-                        $mensaje = "¡Registros eliminados correctamente.!";
-                    } else {
-                        $mensaje =  "Error al eliminar registros: " . mysqli_error($cone);
-                    }
-                } else {
-                    $mensaje =  "Error al eliminar registros: " . mysqli_error($cone);
-                }
-
-                // Cerrar la conexión a la base de datos
-                mysqli_close($cone);
-          }
+            $mensaje = "Error: Falla en la conexión a la BD...";
+        } else {
+            if (mysqli_query($cone, $sql)) {
+                // Mostrar un mensaje de confirmación antes de enviar el formulario
+                echo "<script>
+                        if (confirm('¿Estás seguro de borrar el registro?')) {
+                            document.getElementById('formBorrar').submit();
+                        }
+                    </script>";
+            } else {
+                $mensaje =  "Error al eliminar registros: " . mysqli_error($cone);
+            }
+            // Cerrar la conexión a la base de datos
+            mysqli_close($cone);
+        }
     }
-   
 }
+
 if(isset($_POST['btnPDF'])){
     $ID = $_POST['ID'];
     if($ID == ""){
@@ -259,6 +256,92 @@ if(isset($_POST['btnPDF'])){
         } 
     }
 }
+if(isset($_POST['btnGuardar'])){
+    $NUsuario = $_POST['NUsuario'];
+    $APMaterno = $_POST['APMaterno'];
+    $APParteno = $_POST['APParteno'];
+    $Marca = $_POST['Marca'];
+    $Modelo = $_POST['Modelo'];
+    $numSerie = $_POST['numSerie'];
+    $numInventario = $_POST['numInventario'];
+    $So = $_POST['So'];
+    $Procesador = $_POST['Procesador'];
+    $DiscoDuro = $_POST['DiscoDuro'];
+    $Ram = $_POST['Ram'];
+    $TipoMemoria = $_POST['TipoMemoria'];
+    $Observaciones = $_POST['Observaciones'];
+    $contraseña = $_POST['contraseña'];
+    $NEquipo = $_POST['NEquipo'];
+    $IP = $_POST['IP'];
+    $Mac = $_POST['Mac'];
+    $Departamento =  $_POST['Departamento'];
+
+    include('../bd/bd.php');
+    $cone = conectar();
+    if ($cone == false) {
+        $mensaje = "Error: Falla en la conexion a la BD...";
+      }
+      else{
+            $sql = "INSERT INTO DatosEquipo VALUES(NULL,'$NUsuario','$APParteno','$APMaterno','$Marca','$Modelo','$numSerie','$numInventario',
+            '$So','$Procesador','$DiscoDuro','$Ram','$TipoMemoria','$Observaciones','$contraseña','$NEquipo','$IP','$Mac','$Departamento')";
+            
+                if (operacion($sql,$cone)) {
+                  $mensaje = "¡Datos registrados correctamente!";
+                }
+                else {
+                  $mensaje = "Error: Al registrar los datos ";
+                }
+              
+        
+        mysqli_close($cone);
+      }
+}
+if(isset($_POST['btnModificar'])){
+    $ID = $_POST['ID'];
+
+    $NUsuario = $_POST['NUsuario'];
+    $APMaterno = $_POST['APMaterno'];
+    $APParteno = $_POST['APParteno'];
+    $Marca = $_POST['Marca'];
+    $Modelo = $_POST['Modelo'];
+    $numSerie = $_POST['numSerie'];
+    $numInventario = $_POST['numInventario'];
+    $So = $_POST['So'];
+    $Procesador = $_POST['Procesador'];
+    $DiscoDuro = $_POST['DiscoDuro'];
+    $Ram = $_POST['Ram'];
+    $TipoMemoria = $_POST['TipoMemoria'];
+    $Observaciones = $_POST['Observaciones'];
+    $contraseña = $_POST['contraseña'];
+    $NEquipo = $_POST['NEquipo'];
+    $IP = $_POST['IP'];
+    $Mac = $_POST['Mac'];
+    $Departamento =  $_POST['Departamento'];
+    include('../bd/bd.php');
+    $cone = conectar();
+    if ($cone == false) {
+        $mensaje = "Error: Falla en la conexion a la BD...";
+      }else {
+        $sql = "SELECT * FROM DatosEquipo WHERE iduser = $ID";
+        $resultado = mysqli_query($cone, $sql);
+
+        // Aquí se realiza la consulta de modificación
+        $sql = "UPDATE DatosEquipo SET nombre='$NUsuario', apellidoP='$APParteno', apellidoM='$APMaterno',
+        marca='$Marca', modelo='$Modelo', numserie='$numSerie', numInventario='$numInventario', So='$So',
+        Procesador='$Procesador', DiscoDuro='$DiscoDuro', Ram='$Ram', TipoMemoria='$TipoMemoria', 
+        Observaciones='$Observaciones', contraseña='$contraseña', NEquipo='$NEquipo', IP='$IP',
+        Mac='$Mac', Departamento='$Departamento' WHERE iduser=$ID";
+
+        if (operacion($sql, $cone)) {
+            $mensaje = "¡Datos modificados correctamente!";
+
+        } 
+        else {
+            $mensaje = "Error: Al modificar los datos";
+        }
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -310,96 +393,100 @@ if(isset($_POST['btnPDF'])){
                 </label>
 
                 <label for="NUsuario" >Nombre del Usuario:
-                <input type="text" name="NUsuario" id="NUsuario" class="entrada" pattern="[A-Z ]+" disabled value="<?php if(isset($_POST['btnBuscar']))echo $NUsuario; ?>">
+                <input type="text" name="NUsuario" id="NUsuario" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']))echo $NUsuario; ?>">
 
                 <span class="error"></span><br>
                 </label>
 
                     <label for="APParteno">Apellido Paterno:
-                    <input type="text" id="APParteno" name="APParteno" class="entrada" pattern="[A-Z]+" disabled value="<?php if(isset($_POST['btnBuscar']))echo $APParteno; ?>">
+                    <input type="text" id="APParteno" name="APParteno" class="entrada" pattern="[A-Z]+"  value="<?php if(isset($_POST['btnBuscar']))echo $APParteno; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="APMaterno">Apellido Materno:
-                    <input type="text" id="APMaterno" name="APMaterno" class="entrada" pattern="[A-Z]+" disabled value="<?php if(isset($_POST['btnBuscar']))echo $APMaterno; ?>">
+                    <input type="text" id="APMaterno" name="APMaterno" class="entrada" pattern="[A-Z]+"  value="<?php if(isset($_POST['btnBuscar']))echo $APMaterno; ?>">
                     <span class="error"></span><br>
                     </label>
             
                     <label for="Marca">Marca:
-                    <input type="text" id="Marca" name="Marca" class="entrada" pattern="[A-Z ]+" disabled value="<?php if(isset($_POST['btnBuscar']))echo $Marca; ?>">
+                    <input type="text" id="Marca" name="Marca" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']))echo $Marca; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Modelo">Modelo:
-                    <input type="text" id="Modelo" name="Modelo" class="entrada" pattern="[A-Z,0-9,-]+" disabled value="<?php if(isset($_POST['btnBuscar']))echo $Modelo; ?>">
+                    <input type="text" id="Modelo" name="Modelo" class="entrada" pattern="[A-Z,0-9,-]+"  value="<?php if(isset($_POST['btnBuscar']))echo $Modelo; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="numSerie">Numero de Serie:
-                    <input type="number" id="numSerie" name="numSerie" class="entrada" pattern="[0-9]+" disabled value="<?php if(isset($_POST['btnBuscar']))echo $numSerie; ?>">
+                    <input type="text" id="numSerie" name="numSerie" class="entrada" value="<?php if(isset($_POST['btnBuscar']))echo $numSerie; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="numInventario">Numero de Inventario:
-                    <input type="number" id="numInventario" name="numInventario" class="entrada" pattern="[0-9]+" disabled value="<?php if(isset($_POST['btnBuscar']))echo $numInventario; ?>">
+                    <input type="number" id="numInventario" name="numInventario" class="entrada" pattern="[0-9]+"  value="<?php if(isset($_POST['btnBuscar']))echo $numInventario; ?>">
                     <span class="error"></span><br>
                     </label>
                 </td>
 
                 <td> 
                     <label for="So">So:
-                    <input type="text" id="So" name="So" class="entrada" disabled value="<?php if(isset($_POST['btnBuscar']))echo $So; ?>">
+                    <input type="text" id="So" name="So" class="entrada"  value="<?php if(isset($_POST['btnBuscar']))echo $So; ?>">
                     <span class="error"></span><br>
                     </label>
             
                     <label for="Procesador">Procesador:
-                    <input type="text" id="Procesador" name="Procesador" class="entrada" disabled value="<?php if(isset($_POST['btnBuscar']))echo $Procesador; ?>">
+                    <input type="text" id="Procesador" name="Procesador" class="entrada"  value="<?php if(isset($_POST['btnBuscar']))echo $Procesador; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="DiscoDuro">Disco Duro:
-                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]+([G,M,B,]{1})" disabled value="<?php if(isset($_POST['btnBuscar']))echo $DiscoDuro; ?>">
+                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]+([G,M,B,]{1})"  value="<?php if(isset($_POST['btnBuscar']))echo $DiscoDuro; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Ram">Memoria Ram:
-                    <input type="text" id="Ram" name="Ram" class="entrada" pattern="[0-9]+([G,M,B,]{1})" disabled value="<?php if(isset($_POST['btnBuscar']))echo $Ram; ?>">
+                    <input type="text" id="Ram" name="Ram" class="entrada" pattern="[0-9]+([G,M,B,]{1})"  value="<?php if(isset($_POST['btnBuscar']))echo $Ram; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="TipoMemoria">Tipo de Memoria:
-                    <input type="text" id="TipoMemoria"  name="TipoMemoria" class="entrada" disabled value="<?php if(isset($_POST['btnBuscar']))echo $TipoMemoria; ?>">
+                    <input type="text" id="TipoMemoria"  name="TipoMemoria" class="entrada"  value="<?php if(isset($_POST['btnBuscar']))echo $TipoMemoria; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Observaciones">Observaciones:
-                    <input type="text" id="Observaciones"  name="Observaciones" class="CajonGrande" disabled value="<?php if(isset($_POST['btnBuscar']))echo $Observaciones; ?>">
+                    <input type="text" id="Observaciones"  name="Observaciones" class="CajonGrande"  value="<?php if(isset($_POST['btnBuscar']))echo $Observaciones; ?>">
                     <span class="error"></span><br>
                     </label>
                 </td>
                 <td> 
                     <label for="contraseña">Contraseña:
-                    <input type="password" id="contraseña"  name="contraseña" class="entrada" disabled value="<?php if(isset($_POST['btnBuscar']))echo $contraseña; ?>">
+                    <input type="password" id="contraseña"  name="contraseña" class="entrada"  value="<?php if(isset($_POST['btnBuscar']))echo $contraseña; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="NEquipo">Nombre del Equipo:
-                    <input type="text" id="NEquipo"  name="NEquipo" class="entrada" pattern="[A-Z,0-9]+" disabled value="<?php if(isset($_POST['btnBuscar']))echo $NEquipo; ?>">
+                    <input type="text" id="NEquipo"  name="NEquipo" class="entrada" pattern="[A-Z,0-9]+"  value="<?php if(isset($_POST['btnBuscar']))echo $NEquipo; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="IP">IP:
-                    <input type="text" id="IP"  name="IP" class="entrada" pattern="((^|\.)((25[0-5]_*)|(2[0-4]\d_*)|(1\d\d_*)|([1-9]?\d_*))){4}_*$" disabled value="<?php if(isset($_POST['btnBuscar']))echo $IP; ?>">
+                    <input type="text" id="IP"  name="IP" class="entrada" pattern="((^|\.)((25[0-5]_*)|(2[0-4]\d_*)|(1\d\d_*)|([1-9]?\d_*))){4}_*$"  value="<?php if(isset($_POST['btnBuscar']))echo $IP; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Mac" >Mac:
-                    <input type="text" id="Mac"  name="Mac" class="entrada" disabled value="<?php if(isset($_POST['btnBuscar']))echo $Mac; ?>">
+                    <input type="text" id="Mac"  name="Mac" class="entrada"  value="<?php if(isset($_POST['btnBuscar']))echo $Mac; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <button id="btnBuscar" name="btnBuscar" class="boton" type="submit">BUSCAR</button>
+                    <button id="btnGuardar" name="btnGuardar" class="boton" type="submit">GUARDAR</button>
+                    
+                    <br><br><br>
                     <button id="btnBorrar" name="btnBorrar" class="boton" type="submit">BORRAR</button>
+                    <button id="btnModificar" name="btnModificar" class="boton" type="submit">MODIFICAR</button>
                     <br><br><br>
                     <button id="btnPDF" name="btnPDF" class="boton" type="submit">DESCARGAR PDF</button>
                 </td>
@@ -411,31 +498,22 @@ if(isset($_POST['btnPDF'])){
                 </tr>
 
                 <td>
+                    
                     <label for="Departamento">Departamento:</label>
-                    <select name="Departamento" class="entradaS" disabled>
-                        <option value="">Seleccione un Departamento</option>
-                        <option value="ST" <?php if ($Departamento == 'ST') echo 'selected'; ?>>Subdirección técnica</option>
-                        <option value="SA" <?php if ($Departamento == 'SA') echo 'selected'; ?>>Subdirección administrativa</option>
-                        <option value="RMS" <?php if ($Departamento == 'RMS') echo 'selected'; ?>>Recursos materiales y de servicios</option>
-                        <option value="RM" <?php if ($Departamento == 'RM') echo 'selected'; ?>>Recursos humanos</option>
-                        <option value="RF" <?php if ($Departamento == 'RF') echo 'selected'; ?>>Recursos financieros</option>
-                        <option value="PRO" <?php if ($Departamento == 'PRO') echo 'selected'; ?>>Producción</option>
-                        <option value="PPP" <?php if ($Departamento == 'PPP') echo 'selected'; ?>>Planeación, Programación y Presupuestación</option>
-                        <option value="MTG" <?php if ($Departamento == 'MTG') echo 'selected'; ?>>Metrologia</option>
-                        <option value="GTV" <?php if ($Departamento == 'GTV') echo 'selected'; ?>>Gestión tecnológica y vinculación</option>
-                        <option value="DDE" <?php if ($Departamento == 'DDE') echo 'selected'; ?>>Diseño y Desarrollo de Equipo</option>
-                        <option value="DIR" <?php if ($Departamento == 'DIR') echo 'selected'; ?>>Dirección</option>
-                        <option value="CIT" <?php if ($Departamento == 'CIT') echo 'selected'; ?>>Centro de información técnica</option>
-                        <option value="ATM" <?php if ($Departamento == 'ATM') echo 'selected'; ?>>Asistencia técnica y mantenimiento</option>
-                        <option value="AM" <?php if ($Departamento == 'AM') echo 'selected'; ?>>Administración de la Calidad</option>
-                        <option value="NA" <?php if ($Departamento == 'NA') echo 'selected'; ?>>ninguna</option>
+                    <select name="Departamento" class="entradaS" >
+                    <option value="">Seleccione un Departamento</option>
+                        <?php foreach($listDepartamentos as $item =>$key  ):?>
+                            <option value="<?=$item?>" <?php if(isset($Departamento))echo ((ltrim($Departamento)==$item)?'selected':'')?> >
+                              <?=$key?>
+                            </option>    
+                        <?php endforeach;?>                      
                     </select>
                     <br><br>
                 </td>
                
             </table><br>
             <?php
-                if ($mensaje == "¡Registros eliminados correctamente.!" || $mensaje == "¡Registros Encontrados Correctamente.!" || $mensaje == "¡Registro Descargado Correctamente.!") {
+                if ($mensaje == "¡Datos modificados correctamente!" || $mensaje == "¡Datos registrados correctamente!" || $mensaje == "¡Registros eliminados correctamente.!" || $mensaje == "¡Registros Encontrados Correctamente.!" || $mensaje == "¡Registro Descargado Correctamente.!") {
                     echo '<div style="position: absolute ; top: 50%; left: 50%; transform: translate(50%, 800%); 
                     background-color: #f2f2f2; border: 1px solid #ddd; border-radius: 5px; padding: 10px; display: inline-block;">';
                     echo '<span style="color: #4CAF50; font-size: 24px; margin-right: 10px;">&#10004;</span>';

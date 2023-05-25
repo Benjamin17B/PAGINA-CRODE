@@ -34,12 +34,12 @@ if(isset($_POST['btnCPUAvan'])){
         <section>
             <table>
                 <tr>
-                    <td><h1> <i>GUARDAR</i> </h1></td>
-                    <td><h1> <i> OPCIONES AVANZADAS</i> </h1></td>
+                    <td><h1> <i>REGISTRAR</i> </h1></td>
+                    <td><h1> <i> VER REGISTROS</i> </h1></td>
                 </tr>
                 
            <td>
-           <a href="CPUS.php"> 
+           <a href="CPUSAvan.php"> 
             <button type = "submit" name="btnCPU"> 
                 <img src="../img/crode.png" class="imagen">
             </button>
