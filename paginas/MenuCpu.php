@@ -1,12 +1,3 @@
-<?php
-if(isset($_POST['btnCPU'])){
-    header('CPUS.php');
-}
-if(isset($_POST['btnCPUAvan'])){
-    header('CPUSAvan.php');
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,20 +25,20 @@ if(isset($_POST['btnCPUAvan'])){
         <section>
             <table>
                 <tr>
-                    <td><h1> <i>REGISTRAR</i> </h1></td>
-                    <td><h1> <i> VER REGISTROS</i> </h1></td>
+                    <td><h1> <i>VER REGISTROS</i> </h1></td>
+                    <td><h1> <i>CPUS</i> </h1></td>
                 </tr>
                 
            <td>
-           <a href="CPUSAvan.php"> 
-            <button type = "submit" name="btnCPU"> 
+           <a href="Registros.php"> 
+            <button type = "submit" name="btnRegistros"> 
                 <img src="../img/crode.png" class="imagen">
             </button>
             </td>
 
             <td>
-            <a href="CPUSAvan.php">
-                <button type = "submit" name="btnCPUAvan"> 
+            <a href="CPUS.php">
+                <button type = "submit" name="btnCPU"> 
                 <img src="../img/crode.png" class="imagen">
             </button>
            </td>
