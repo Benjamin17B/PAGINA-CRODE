@@ -320,3 +320,28 @@ caption{
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
 }
+.boton{
+  background-color: rgba(182, 155, 0, 0.7); 
+  border: none;
+  height: 45px;
+  width: 100px;
+  outline: none;
+  color: #FFF;
+  border-radius: 10px;
+  float: none;
+  margin: 0px 8px 0px 10px;
+  cursor: pointer;
+  padding: 3px;
+}
+.boton:hover{
+  transition: 1000ms;
+  background-color: rgb(182, 155, 0);
+}
+.tituloCorto {
+  font-size: 1.3em;
+  text-align: center;
+  background-color: #FFF;
+  color: #000;
+  font-weight: 700;
+  padding: 20px;
+}

@@ -329,6 +329,9 @@ if(isset($_POST['btnModificar'])){
     }
 }
 
+if (isset($_POST['ID'])) {
+    $ID = $_POST['ID'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -374,7 +377,7 @@ if(isset($_POST['btnModificar'])){
     
                 <td> 
                 <label for="ID" >Número de ID:
-                <input type="number" name="ID" id="ID" class="entrada" pattern="[0-9]+" value="<?php if(isset($_POST['btnBuscar']))echo $ID; ?>">
+                <input type="number" name="ID" id="ID" class="entrada" pattern="[0-9]+" value="<?php echo $ID; ?>">
 
                 <span class="error"></span><br>
                 </label>

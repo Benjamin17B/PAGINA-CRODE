@@ -8,7 +8,7 @@ $listDepartamentos = [
     'RF' => "Recursos financieros",
     'PRO' => "Producción",
     'PPP' => "Planeación, Programación y Presupuestación",
-    'MTG' => "Metrologia",
+    'MTG' => "Metrología",
     'GTV' => "Gestión tecnológica y vinculación",
     'DDE' => "Diseño y Desarrollo de Equipo",
     'DIR' => "Dirección",
@@ -18,8 +18,9 @@ $listDepartamentos = [
     'NA' => "ninguna"
 ];
 
-if (isset($_GET['Departamento'])) {
-    $departamento = $_GET['Departamento'];
+// Obtén el valor del parámetro 'departamentos' enviado por el formulario
+if (isset($_POST['departamentos'])) {
+    $departamentos = $_POST['departamentos'];
 
     // Realiza la conexión a la base de datos y realiza la consulta
     // Asegúrate de utilizar las credenciales correctas para tu base de datos
@@ -30,86 +31,82 @@ if (isset($_GET['Departamento'])) {
         die("Error de conexión: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM tu_tabla WHERE Departamento = '$departamento'";
+    $sql = "SELECT * FROM datosequipo WHERE Departamento = '$departamentos'";
     $result = $conn->query($sql);
 
     // Genera la tabla HTML con los datos obtenidos
     if ($result->num_rows > 0) {
         $mensaje .= "<table>";
-        $mensaje .= "<tr><th>ID User</th><th>Número de Equipo</th><th>IP</th></tr>";
+        $mensaje .= "<tr><th>ID del Usuario</th><th>Número de Equipo</th><th>IP</th></tr>";
         while ($row = $result->fetch_assoc()) {
             $mensaje .= "<tr>";
             $mensaje .= "<td>" . $row['iduser'] . "</td>";
             $mensaje .= "<td>" . $row['NEquipo'] . "</td>";
             $mensaje .= "<td>" . $row['IP'] . "</td>";
+            $mensaje .= "<td>  
+                            <form method='post' action='Acceso.php'>
+                                <input type='hidden' name='ID' value='" . $row['iduser'] . "'>
+                                <button type='submit' class='boton'>Acceder</button>
+                            </form>
+                        </td>";
             $mensaje .= "</tr>";
         }
         $mensaje .= "</table>";
     } else {
-        $mensaje = "No se encontraron resultados.";
+        $mensaje .= "No se encontraron registros en el departamento de $departamentos";
     }
 
     $conn->close();
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>CPU'S</title>
     <link rel="stylesheet" href="../css/pagina.css">
     <link rel="shortcut icon" href="../img/crode.png">
 </head>
+
 <header>
     <h1>Asistencia Técnica y Mantenimiento</h1>
 </header>
+
 <nav>
     <ul>
         <li><a href="../index.php">INICIO</a></li>
-        <li><a href="#">SERVICIOS</a>
-            <ul>
-                <li><a href="MenuCpu.php">CPU'S</a></li>
-                <li><a href="#">IMPRESORAS</a></li>
-            </ul>
-        </li>
+        <li><a href="VerDatos.php">VER DATOS</a></li>
     </ul>
 </nav>
+
 <body>
     <main>
+        <p class="tituloCorto">Seleccione un departamento</p>
         <section>
-            <select name="Departamento" class="entradaS" onchange="mostrarTabla()">
+            <form method="post" action="">
+                <label for="departamentos">Departamento:</label>
+                <select name="departamentos" id="departamentos" class="entrada">
                 <option value="">Seleccione un Departamento</option>
-                <?php foreach ($listDepartamentos as $item => $key) : ?>
-                    <option value="<?= $item ?>" <?php if (isset($departamento) && $departamento == $item) echo 'selected' ?>>
-                        <?= $key ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
+                    <?php
+                    foreach ($listDepartamentos as $key => $value) {
+                        echo "<option value='$key'>$value</option>";
+                    }
+                    ?>
+                </select>
+                <button type="submit" class="boton">Buscar</button>
+            </form><br><br>
+      
+        <?php echo $mensaje; ?><br><br>
 
-            <div id="tablaDatos"><?= $mensaje ?></div>
-
+        
+            <form method="post" action="CPUS.php">
+                <label for="ID">ID:</label>
+                <input type="number" name="ID" id="ID" class="entrada" pattern="[0-9]+">
+                <button type="submit" class="boton">Acceder</button>
+            </form>
         </section>
     </main>
-
-    <script>
-        function mostrarTabla() {
-            var select = document.getElementsByName("Departamento")[0];
-            var departamento = select.value;
-
-            if (departamento !== "") {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("tablaDatos").innerHTML = this.responseText;
-                    }
-                };
-                xhttp.open("GET", "CPUS.php?departamento=" + departamento, true);
-                xhttp.send();
-            } else {
-                document.getElementById("tablaDatos").innerHTML = "";
-            }
-        }
-    </script>
 </body>
+
 </html>
