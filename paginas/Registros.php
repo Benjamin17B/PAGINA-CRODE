@@ -37,14 +37,15 @@ if (isset($_POST['departamentos'])) {
     // Genera la tabla HTML con los datos obtenidos
     if ($result->num_rows > 0) {
         $mensaje .= "<table>";
-        $mensaje .= "<tr><th>ID del Usuario</th><th>Número de Equipo</th><th>IP</th></tr>";
+        $mensaje .= "<tr><th>ID del Usuario</th><th>Número de Equipo</th><th>IP</th><th>No°Inventario</th></tr>";
         while ($row = $result->fetch_assoc()) {
             $mensaje .= "<tr>";
             $mensaje .= "<td>" . $row['iduser'] . "</td>";
             $mensaje .= "<td>" . $row['NEquipo'] . "</td>";
             $mensaje .= "<td>" . $row['IP'] . "</td>";
+            $mensaje .= "<td>" . $row['numInventario'] . "</td>";
             $mensaje .= "<td>  
-                            <form method='post' action='Acceso.php'>
+                            <form method='post' action='CPUS.php'>
                                 <input type='hidden' name='ID' value='" . $row['iduser'] . "'>
                                 <button type='submit' class='boton'>Acceder</button>
                             </form>
@@ -74,11 +75,16 @@ if (isset($_POST['departamentos'])) {
 </header>
 
 <nav>
-    <ul>
-        <li><a href="../index.php">INICIO</a></li>
-        <li><a href="VerDatos.php">VER DATOS</a></li>
-    </ul>
-</nav>
+		<ul>
+			<li><a href="../index.php">INICIO</a></li>
+			<li><a href="#">SERVICIOS</a>
+				<ul>
+					<li><a href="MenuCpu.php">CPU'S</a></li>
+					<li><a href="#">IMPRESORAS</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
 
 <body>
     <main>
@@ -99,12 +105,6 @@ if (isset($_POST['departamentos'])) {
       
         <?php echo $mensaje; ?><br><br>
 
-        
-            <form method="post" action="CPUS.php">
-                <label for="ID">ID:</label>
-                <input type="number" name="ID" id="ID" class="entrada" pattern="[0-9]+">
-                <button type="submit" class="boton">Acceder</button>
-            </form>
         </section>
     </main>
 </body>

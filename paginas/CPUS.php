@@ -328,7 +328,6 @@ if(isset($_POST['btnModificar'])){
         }
     }
 }
-
 if (isset($_POST['ID'])) {
     $ID = $_POST['ID'];
 }
@@ -380,6 +379,7 @@ if (isset($_POST['ID'])) {
                 <input type="number" name="ID" id="ID" class="entrada" pattern="[0-9]+" value="<?php echo $ID; ?>">
 
                 <span class="error"></span><br>
+                <p class="Notas"><b>NOTA:</b> No es necesario llenar el campo del <b>ID</b> en caso de querer Guardar</p>
                 </label>
 
                 <label for="NUsuario" >Nombre del Usuario:
@@ -389,12 +389,12 @@ if (isset($_POST['ID'])) {
                 </label>
 
                     <label for="APParteno">Apellido Paterno:
-                    <input type="text" id="APParteno" name="APParteno" class="entrada" pattern="[A-Z]+"  value="<?php if(isset($_POST['btnBuscar']))echo $APParteno; ?>">
+                    <input type="text" id="APParteno" name="APParteno" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']))echo $APParteno; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="APMaterno">Apellido Materno:
-                    <input type="text" id="APMaterno" name="APMaterno" class="entrada" pattern="[A-Z]+"  value="<?php if(isset($_POST['btnBuscar']))echo $APMaterno; ?>">
+                    <input type="text" id="APMaterno" name="APMaterno" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']))echo $APMaterno; ?>">
                     <span class="error"></span><br>
                     </label>
             

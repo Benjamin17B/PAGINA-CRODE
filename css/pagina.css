@@ -302,13 +302,13 @@ th{
   background-color: #000;
   color: #FFF;
   font-weight: bold;
-  text-align: center;
 }
 td{
+  text-align: center;
+  vertical-align: middle;
   background-color: #FFF;
   color: #000;
   font-weight: 700;
-  text-align: justify;
 }
 caption{
   font-weight: bold;
@@ -344,4 +344,13 @@ caption{
   color: #000;
   font-weight: 700;
   padding: 20px;
+}
+.Notas{
+  text-align: center;
+  font-size: 0.9em;
+  font-style: italic;
+  font-weight: 400;
+  color: #010F58;
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
