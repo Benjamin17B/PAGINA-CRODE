@@ -180,62 +180,57 @@ if(isset($_POST['btnPDF'])){
                 
             
             
-                                    $pdf->SetFont('dejavusans', 'B', 15);
-                                    $pdf->Cell(0, 10, 'DATOS  DEL EQUIPO: ', 0, 1, 'C');
-                                    
-                $pdf->SetFont('dejavusans', '', 12, '', true);
-                $pdf->Cell(0, 10, 'Nombre: '.str_pad($NUsuario, STR_PAD_LEFT), 0, 1);
-                $pdf->Cell(0, 10, 'Apellido Materno: '.str_pad($APMaterno, STR_PAD_LEFT), 0, 1);
-                $pdf->Cell(0, 10, 'Apellido Paterno: '.str_pad($APParteno, STR_PAD_LEFT), 0, 1);
-                $pdf->Cell(0, 10, 'Marca: '.str_pad($Marca, STR_PAD_LEFT), 0, 1);
-                $pdf->Cell(0, 10, 'Modelo: '.str_pad($Modelo, STR_PAD_LEFT), 0, 1);
-                $pdf->Cell(0, 10, 'Número de Serie: '.str_pad($numSerie, STR_PAD_LEFT), 0, 1);
-                $pdf->Cell(0, 10, 'Número de Inventario: '.str_pad($numInventario, STR_PAD_LEFT), 0, 1);
-            
-                                    $pdf->SetFont('dejavusans', 'B', 15);
-                                    $pdf->Cell(0, 10, 'DESEMPEÑO DEL EQUIPO: ', 0, 1, 'C');
-            
-                $pdf->SetFont('dejavusans', '', 12, '', true);
-                $pdf->Cell(0, 10, 'SO: '.str_pad($So, STR_PAD_LEFT), 0, 1);
-                $pdf->Cell(0, 10, 'Procesador: '.str_pad($Procesador, STR_PAD_LEFT), 0, 1);
-                $pdf->Cell(0, 10, 'Disco Duro: '.str_pad($DiscoDuro, STR_PAD_LEFT), 0, 1);
-                $pdf->Cell(0, 10, 'Ram: '.str_pad($Ram, STR_PAD_LEFT), 0, 1);
-                $pdf->Cell(0, 10, 'Tipo de Memoria: '.str_pad($TipoMemoria, STR_PAD_LEFT), 0, 1);
-                $pdf->Cell(0, 10, 'Observaciones: '.str_pad($Observaciones, STR_PAD_LEFT), 0, 1);
-            
-                                    $pdf->SetFont('dejavusans', 'B', 15);
-                                    $pdf->Cell(0, 10, 'DATOS DE LA RED: ', 0, 1, 'C');
-            
-                $pdf->SetFont('dejavusans', '', 12, '', true);
-                $pdf->Cell(0, 10, 'Contraseña: '.str_pad($contraseña, STR_PAD_LEFT), 0, 1);
-                $pdf->Cell(0, 10, 'Nombre del Equipo: '.str_pad($NEquipo, STR_PAD_LEFT), 0, 1);
-                $pdf->Cell(0, 10, 'IP: '.str_pad($IP, STR_PAD_LEFT), 0, 1);
-                $pdf->Cell(0, 10, 'Mac: '.str_pad($Mac, STR_PAD_LEFT), 0, 1);
-            
-                                    $pdf->SetFont('dejavusans', 'B', 15);
-                                    $pdf->Cell(0, 10, 'DEPARTAMENTO: ', 0, 1, 'C');
-            
-                $pdf->SetFont('dejavusans', '', 12, '', true);
-                $pdf->Cell(0, 10, 'Departamento: '.str_pad($Departamento, STR_PAD_LEFT), 0, 1);
+                                    // Establecer el ancho de las columnas
+                $columnWidth = $pdf->GetPageWidth() / 2;
 
-                            
-                $pdf->AddPage();
+                $pdf->SetFont('dejavusans', 'B', 15);
 
-                                    $pdf->SetFont('dejavusans', 'B', 15);
-                                    $pdf->Cell(0, 10, 'CODIGO DE BARRAS: ', 0, 1, 'C');
+                // Título columna izquierda
+                $pdf->Cell($columnWidth, 10, 'DATOS  DEL EQUIPO: ', 0, 0, 'L');
+
+                // Título columna derecha
+                $pdf->SetX($columnWidth);
+                $pdf->Cell($columnWidth, 10, 'DESEMPEÑO DEL EQUIPO: ', 0, 1, 'L');
+
+                $pdf->SetFont('dejavusans', '', 12, '', true);
+
+                // Contenido columna izquierda
+                $pdf->SetY($pdf->GetY() + 10); // Agregar espacio entre títulos y contenido izquierdo
+                $pdf->SetX(10); // Establecer la posición X para la columna izquierda
+                $pdf->MultiCell($columnWidth, 10, 'Nombre: ' . str_pad($NUsuario, STR_PAD_LEFT), 0, 'L');
+                $pdf->SetX(10);
+                $pdf->MultiCell($columnWidth, 10, 'Apellido Materno: ' . str_pad($APMaterno, STR_PAD_LEFT), 0, 'L');
+                $pdf->SetX(10);
+                $pdf->MultiCell($columnWidth, 10, 'Apellido Paterno: ' . str_pad($APParteno, STR_PAD_LEFT), 0, 'L');
+                $pdf->SetX(10);
+                $pdf->MultiCell($columnWidth, 10, 'Marca: ' . str_pad($Marca, STR_PAD_LEFT), 0, 'L');
+                $pdf->SetX(10);
+                $pdf->MultiCell($columnWidth, 10, 'Modelo: ' . str_pad($Modelo, STR_PAD_LEFT), 0, 'L');
+                $pdf->SetX(10);
+                $pdf->MultiCell($columnWidth, 10, 'Número de Serie: ' . str_pad($numSerie, STR_PAD_LEFT), 0, 'L');
+                $pdf->SetX(10);
+                $pdf->MultiCell($columnWidth, 10, 'Número de Inventario: ' . str_pad($numInventario, STR_PAD_LEFT), 0, 'L');
                 
-                $pdf->SetFont('dejavusans', '', 12, '', true);
+                // Agregar más contenido a la columna izquierda
 
-                // Obtener las dimensiones del código de barras
-                $barcodeWidth = 80;
-                $barcodeHeight = 15;
+                // Contenido columna derecha
+                $pdf->SetY($pdf->GetY() - 70); // Restablecer la posición Y al mismo nivel que el título
+                $pdf->SetX($columnWidth + 20); // Establecer la posición X para la columna derecha
+                $pdf->MultiCell($columnWidth, 10, 'SO: ' . str_pad($So, STR_PAD_LEFT), 0, 'L');
+                $pdf->SetX($columnWidth + 20);
+                $pdf->MultiCell($columnWidth, 10, 'Procesador: ' . str_pad($Procesador, STR_PAD_LEFT), 0, 'L');
+                $pdf->SetX($columnWidth + 20);
+                $pdf->MultiCell($columnWidth, 10, 'Disco Duro: ' . str_pad($DiscoDuro, STR_PAD_LEFT), 0, 'L');
+                $pdf->SetX($columnWidth + 20);
+                $pdf->MultiCell($columnWidth, 10, 'Ram: ' . str_pad($Ram, STR_PAD_LEFT), 0, 'L');
+                $pdf->SetX($columnWidth + 20);
+                $pdf->MultiCell($columnWidth, 10, 'Tipo de Memoria: ' . str_pad($TipoMemoria, STR_PAD_LEFT), 0, 'L');
+                $pdf->SetX($columnWidth + 20);
+                $pdf->MultiCell($columnWidth, 10, 'Observaciones: ' . str_pad($Observaciones, STR_PAD_LEFT), 0, 'L');
+                // Agregar más contenido a la columna derecha  
+                
                                     
-                // Calcular la posición horizontal para centrar el código de barras
-                $pageWidth = $pdf->GetPageWidth();
-                $x = ($pageWidth - $barcodeWidth) / 2;
-                                    
-                $pdf->write1DBarcode($nuevo_id, 'C128', $x, '', $barcodeWidth, $barcodeHeight, 0.4, $style = array('position' => 'S', 'border' => 0, 'padding' => 0, 'fontsize' => 8, 'text' => true, 'stretchtext' => 0, 'align' => 'C'), 'N');
-                                 
+                
                 $pdf->Output('Mantenimiento.pdf', 'D');
         }
         else{
