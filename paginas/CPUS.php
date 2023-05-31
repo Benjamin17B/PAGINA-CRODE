@@ -177,10 +177,9 @@ if(isset($_POST['btnPDF'])){
                 $pdf->SetFont('dejavusans', '', 12, '', true);
                 $pdf->Cell(0, 10, 'Número de registro: '.str_pad($id, 6, '0', STR_PAD_LEFT), 0, 1, 'R');
                 $pdf->Cell(0, 10, 'Año actual: ' . date('Y'), 0, 1, 'R');
-                
             
             
-                                    // Establecer el ancho de las columnas
+                // Establecer el ancho de las columnas
                 $columnWidth = $pdf->GetPageWidth() / 2;
 
                 $pdf->SetFont('dejavusans', 'B', 15);
@@ -189,13 +188,13 @@ if(isset($_POST['btnPDF'])){
                 $pdf->Cell($columnWidth, 10, 'DATOS  DEL EQUIPO: ', 0, 0, 'L');
 
                 // Título columna derecha
-                $pdf->SetX($columnWidth);
+                $pdf->SetX($columnWidth+17);
                 $pdf->Cell($columnWidth, 10, 'DESEMPEÑO DEL EQUIPO: ', 0, 1, 'L');
 
                 $pdf->SetFont('dejavusans', '', 12, '', true);
 
                 // Contenido columna izquierda
-                $pdf->SetY($pdf->GetY() + 10); // Agregar espacio entre títulos y contenido izquierdo
+                $pdf->SetY($pdf->GetY() +5); // Agregar espacio entre títulos y contenido izquierdo
                 $pdf->SetX(10); // Establecer la posición X para la columna izquierda
                 $pdf->MultiCell($columnWidth, 10, 'Nombre: ' . str_pad($NUsuario, STR_PAD_LEFT), 0, 'L');
                 $pdf->SetX(10);
@@ -211,7 +210,7 @@ if(isset($_POST['btnPDF'])){
                 $pdf->SetX(10);
                 $pdf->MultiCell($columnWidth, 10, 'Número de Inventario: ' . str_pad($numInventario, STR_PAD_LEFT), 0, 'L');
                 
-                // Agregar más contenido a la columna izquierda
+        
 
                 // Contenido columna derecha
                 $pdf->SetY($pdf->GetY() - 70); // Restablecer la posición Y al mismo nivel que el título
@@ -227,9 +226,58 @@ if(isset($_POST['btnPDF'])){
                 $pdf->MultiCell($columnWidth, 10, 'Tipo de Memoria: ' . str_pad($TipoMemoria, STR_PAD_LEFT), 0, 'L');
                 $pdf->SetX($columnWidth + 20);
                 $pdf->MultiCell($columnWidth, 10, 'Observaciones: ' . str_pad($Observaciones, STR_PAD_LEFT), 0, 'L');
-                // Agregar más contenido a la columna derecha  
-                
+              
+
+                // Título columna izquierda inferior
+                $pdf->SetFont('dejavusans', 'B', 15);
+                $pdf->Cell($columnWidth, 40, 'DATOS DE LA RED: ', 0, 1, 'L');
+
+            
+                // Contenido columna izquierda inferior
+                $pdf->SetY($pdf->GetY() -11); 
+                $pdf->SetFont('dejavusans', '', 12, '', true);
+                $pdf->SetX(10); // Establecer la posición X para la columna izquierda inferior
+                $pdf->MultiCell($columnWidth, 10, 'Contraseña: ' . str_pad($contraseña, STR_PAD_LEFT), 0, 'L');
+                $pdf->SetX(10);
+                $pdf->MultiCell($columnWidth, 10, 'Nombre del Equipo: ' . str_pad($NEquipo, STR_PAD_LEFT), 0, 'L');
+                $pdf->SetX(10);
+                $pdf->MultiCell($columnWidth, 10, 'IP: ' . str_pad($IP, STR_PAD_LEFT), 0, 'L');
+                $pdf->SetX(10);
+                $pdf->MultiCell($columnWidth, 10, 'Mac: ' . str_pad($Mac, STR_PAD_LEFT), 0, 'L');
+                // Agregar más contenido a la columna izquierda inferior
+
+                // Título columna derecha inferior
+                $pdf->SetY($pdf->GetY() - 55); // Restablecer la posición Y al mismo nivel que el título
+                $pdf->SetX($columnWidth + 20); // Establecer la posición X para la columna derecha inferior
+                $pdf->SetFont('dejavusans', 'B', 15);
+                $pdf->Cell($columnWidth, 10, 'DEPARTAMENTO: ', 0, 1, 'L'); // Añadir un sal
+               
+
+                // Contenido columna derecha inferior
+                $pdf->SetFont('dejavusans', '', 12, '', true);
+                $pdf->SetY($pdf->GetY() +3);
+                $pdf->SetX($columnWidth + 20); // Establecer la posición X para la columna derecha inferior
+                $pdf->MultiCell($columnWidth, 10, 'Departamento: ' . str_pad($Departamento, STR_PAD_LEFT), 0, 'L');
+                // Agregar más contenido a la columna derecha inferior
+
+                // Título columna central
+                $pdf->SetY($pdf->GetY() +30); // Restablecer la posición Y al mismo nivel que el título
+                $pdf->SetX($columnWidth -30); // Establecer la posición X para la columna central
+                $pdf->SetFont('dejavusans', 'B', 15);
+                $pdf->Cell($columnWidth, 10, 'CODIGO DE BARRAS: ', 0, 1, 'L'); // Añadir un salto de línea después del título
+
+                // Contenido columna central
+                $pdf->SetFont('dejavusans', '', 12, '', true);
+                $pdf->SetX($columnWidth -30); // Establecer la posición X para la columna central
+                // Obtener las dimensiones del código de barras
+                $barcodeWidth = 80;
+                $barcodeHeight = 15;
                                     
+                // Calcular la posición horizontal para centrar el código de barras
+                $pageWidth = $pdf->GetPageWidth();
+                $x = ($pageWidth - $barcodeWidth) / 2;
+                $pdf->write1DBarcode($nuevo_id, 'C128', $x, '', $barcodeWidth, $barcodeHeight, 0.4, $style = array('position' => 'S', 'border' => 0, 'padding' => 0, 'fontsize' => 8, 'text' => true, 'stretchtext' => 0, 'align' => 'C'), 'N');
+                                     
                 
                 $pdf->Output('Mantenimiento.pdf', 'D');
         }
@@ -323,8 +371,67 @@ if(isset($_POST['btnModificar'])){
         }
     }
 }
-if (isset($_POST['ID'])) {
-    $ID = $_POST['ID'];
+if (isset($_POST['IDPasar'])) {
+   
+    $ID = $_POST['IDPasar'];
+    $NUsuario = "";
+    $APMaterno = "";
+    $APParteno = "";
+    $Marca = "";
+    $Modelo = "";
+    $numSerie = "";
+    $numInventario = "";
+    $So = "";
+    $Procesador = "";
+    $DiscoDuro = "";
+    $Ram = "";
+    $TipoMemoria = "";
+    $Observaciones = "";
+    $contraseña = "";
+    $NEquipo = "";
+    $IP = "";
+    $Mac = "";
+
+       include('../bd/bd.php');
+       $cone = conectar();
+       if ($cone == false) {
+           $mensaje = "Error: Falla en la conexion a la BD...";
+         }
+         else{
+       
+           $sql = "SELECT * FROM datosequipo WHERE iduser = '$ID'";
+           $resultado = mysqli_query($cone, $sql);
+       
+       if (mysqli_num_rows($resultado) > 0) {
+           // Imprimir los resultados
+           while($fila = mysqli_fetch_assoc($resultado)) {
+   
+               $NUsuario = $fila["nombre"];
+               $APMaterno = $fila['apellidoM'];
+               $APParteno = $fila['apellidoP'];
+               $Marca = $fila['marca'];
+               $Modelo = $fila['modelo'];
+               $numSerie = $fila['numserie'];
+               $numInventario = $fila['numInventario'];
+               $So = $fila['So'];
+               $Procesador = $fila['Procesador'];
+               $DiscoDuro = $fila['DiscoDuro'];
+               $Ram = $fila['Ram'];
+               $TipoMemoria = $fila['TipoMemoria'];
+               $Observaciones = $fila['Observaciones'];
+               $contraseña = $fila['contraseña'];
+               $NEquipo = $fila['NEquipo'];
+               $IP = $fila['IP'];
+               $Mac = $fila['Mac'];
+               $Departamento = $fila['Departamento'];
+               
+               $mensaje ="¡Registros Encontrados Correctamente.!";
+               }   
+           } 
+           else {
+               $mensaje =  "El ID que buscaste No existe en la Base de Datos";
+           }
+       }  
 }
 ?>
 <!DOCTYPE html>
@@ -371,98 +478,98 @@ if (isset($_POST['ID'])) {
     
                 <td> 
                 <label for="ID" >Número de ID:
-                <input type="number" name="ID" id="ID" class="entrada" pattern="[0-9]+" value="<?php echo $ID; ?>">
+                <input type="number" name="ID" id="ID" class="entrada" pattern="[0-9]+" value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $ID; ?>">
 
                 <span class="error"></span><br>
                 <p class="Notas"><b>NOTA:</b> No es necesario llenar el campo del <b>ID</b> en caso de querer Guardar</p>
                 </label>
 
                 <label for="NUsuario" >Nombre del Usuario:
-                <input type="text" name="NUsuario" id="NUsuario" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']))echo $NUsuario; ?>">
+                <input type="text" name="NUsuario" id="NUsuario" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']) )echo $NUsuario; ?>">
 
                 <span class="error"></span><br>
                 </label>
 
                     <label for="APParteno">Apellido Paterno:
-                    <input type="text" id="APParteno" name="APParteno" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']))echo $APParteno; ?>">
+                    <input type="text" id="APParteno" name="APParteno" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $APParteno; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="APMaterno">Apellido Materno:
-                    <input type="text" id="APMaterno" name="APMaterno" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']))echo $APMaterno; ?>">
+                    <input type="text" id="APMaterno" name="APMaterno" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $APMaterno; ?>">
                     <span class="error"></span><br>
                     </label>
             
                     <label for="Marca">Marca:
-                    <input type="text" id="Marca" name="Marca" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']))echo $Marca; ?>">
+                    <input type="text" id="Marca" name="Marca" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $Marca; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Modelo">Modelo:
-                    <input type="text" id="Modelo" name="Modelo" class="entrada" pattern="[A-Z,0-9,-]+"  value="<?php if(isset($_POST['btnBuscar']))echo $Modelo; ?>">
+                    <input type="text" id="Modelo" name="Modelo" class="entrada" pattern="[A-Z,0-9,-]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $Modelo; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="numSerie">Numero de Serie:
-                    <input type="text" id="numSerie" name="numSerie" class="entrada" value="<?php if(isset($_POST['btnBuscar']))echo $numSerie; ?>">
+                    <input type="text" id="numSerie" name="numSerie" class="entrada" value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $numSerie; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="numInventario">Numero de Inventario:
-                    <input type="number" id="numInventario" name="numInventario" class="entrada" pattern="[0-9]+"  value="<?php if(isset($_POST['btnBuscar']))echo $numInventario; ?>">
+                    <input type="number" id="numInventario" name="numInventario" class="entrada" pattern="[0-9]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $numInventario; ?>">
                     <span class="error"></span><br>
                     </label>
                 </td>
 
                 <td> 
                     <label for="So">So:
-                    <input type="text" id="So" name="So" class="entrada"  value="<?php if(isset($_POST['btnBuscar']))echo $So; ?>">
+                    <input type="text" id="So" name="So" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $So; ?>">
                     <span class="error"></span><br>
                     </label>
             
                     <label for="Procesador">Procesador:
-                    <input type="text" id="Procesador" name="Procesador" class="entrada"  value="<?php if(isset($_POST['btnBuscar']))echo $Procesador; ?>">
+                    <input type="text" id="Procesador" name="Procesador" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $Procesador; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="DiscoDuro">Disco Duro:
-                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]+([G,M,B,]{1})"  value="<?php if(isset($_POST['btnBuscar']))echo $DiscoDuro; ?>">
+                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]+([G,M,B,]{1})"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $DiscoDuro; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Ram">Memoria Ram:
-                    <input type="text" id="Ram" name="Ram" class="entrada" pattern="[0-9]+([G,M,B,]{1})"  value="<?php if(isset($_POST['btnBuscar']))echo $Ram; ?>">
+                    <input type="text" id="Ram" name="Ram" class="entrada" pattern="[0-9]+([G,M,B,]{1})"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $Ram; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="TipoMemoria">Tipo de Memoria:
-                    <input type="text" id="TipoMemoria"  name="TipoMemoria" class="entrada"  value="<?php if(isset($_POST['btnBuscar']))echo $TipoMemoria; ?>">
+                    <input type="text" id="TipoMemoria"  name="TipoMemoria" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $TipoMemoria; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Observaciones">Observaciones:
-                    <input type="text" id="Observaciones"  name="Observaciones" class="CajonGrande"  value="<?php if(isset($_POST['btnBuscar']))echo $Observaciones; ?>">
+                    <input type="text" id="Observaciones"  name="Observaciones" class="CajonGrande"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $Observaciones; ?>">
                     <span class="error"></span><br>
                     </label>
                 </td>
                 <td> 
                     <label for="contraseña">Contraseña:
-                    <input type="password" id="contraseña"  name="contraseña" class="entrada"  value="<?php if(isset($_POST['btnBuscar']))echo $contraseña; ?>">
+                    <input type="password" id="contraseña"  name="contraseña" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $contraseña; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="NEquipo">Nombre del Equipo:
-                    <input type="text" id="NEquipo"  name="NEquipo" class="entrada" pattern="[A-Z,0-9]+"  value="<?php if(isset($_POST['btnBuscar']))echo $NEquipo; ?>">
+                    <input type="text" id="NEquipo"  name="NEquipo" class="entrada" pattern="[A-Z,0-9]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $NEquipo; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="IP">IP:
-                    <input type="text" id="IP"  name="IP" class="entrada" pattern="((^|\.)((25[0-5]_*)|(2[0-4]\d_*)|(1\d\d_*)|([1-9]?\d_*))){4}_*$"  value="<?php if(isset($_POST['btnBuscar']))echo $IP; ?>">
+                    <input type="text" id="IP"  name="IP" class="entrada" pattern="((^|\.)((25[0-5]_*)|(2[0-4]\d_*)|(1\d\d_*)|([1-9]?\d_*))){4}_*$"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $IP; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Mac" >Mac:
-                    <input type="text" id="Mac"  name="Mac" class="entrada"  value="<?php if(isset($_POST['btnBuscar']))echo $Mac; ?>">
+                    <input type="text" id="Mac"  name="Mac" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $Mac; ?>">
                     <span class="error"></span><br>
                     </label>
 

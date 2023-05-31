@@ -46,7 +46,7 @@ if (isset($_POST['departamentos'])) {
             $mensaje .= "<td>" . $row['numInventario'] . "</td>";
             $mensaje .= "<td>  
                             <form method='post' action='CPUS.php'>
-                                <input type='hidden' name='ID' value='" . $row['iduser'] . "'>
+                                <input type='hidden' name='IDPasar' value='" . $row['iduser'] . "'>
                                 <button type='submit' class='boton'>Acceder</button>
                             </form>
                         </td>";
