@@ -26,7 +26,7 @@
             <table>
                 <tr>
                     <td><h1> <i>VER REGISTROS</i> </h1></td>
-                    <td><h1> <i>CPUS</i> </h1></td>
+                    <td><h1> <i>MANTENIMIENTO</i> </h1></td>
                 </tr>
                 
            <td>

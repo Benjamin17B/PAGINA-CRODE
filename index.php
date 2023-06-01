@@ -38,13 +38,21 @@
 
             <p>2.- <b>Selección del servicio:</b> Una vez que estés en la sección de mantenimiento, encontrarás una lista desplegable con todos los 
                 servicios disponibles. Selecciona el servicio específico para el cual deseas registrar el mantenimiento. Despues de esto apareceran dos opciones 
-            la opcion de <b>Guardar</b> y la de <b>Opciones Avanzadas</b> elija la que más necesite</p><br>
+            la opcion de <b>Ver Registros</b> y la de <b>Mantenimiento</b> elija la que más necesite</p><br>
        
-            <p>3.- <b>Registro de Mantenimiento:</b> Completa los campos proporcionados para registrar los detalles del
+            <p>3.- <b>Ver Registros:</b> Al momento de estar en esta pagina puedes buscar todos los Registros echos en un departamento en especifico, 
+            para verlos deberas seleccionar un departamento y depues darle al boton de buscar, si no hay ningun registro en ese
+            departamento se lanzara un mensaje diciendo que no hay registros en ese departamento</p><br>
+
+            <p>4.- <b>Registro de Mantenimiento:</b> Completa los campos proporcionados para registrar los detalles del
             mantenimiento. Esto puede incluir la descripción del problema, nombre del equipo, nombre de usuario, etc.</p><br>
                  
-            <p>4.- <b>Guardar y enviar:</b>  Una vez que hayas ingresado todos los detalles necesarios, haz 
+            <p>5.- <b>Guardar y enviar:</b>  Una vez que hayas ingresado todos los detalles necesarios, haz 
             clic en el botón "Guardar" o "Enviar" para almacenar la información en nuestro sistema.</p><br>
+
+            <p>6.- <b>Mas Opciones:</b> Una vez dentro en en apartado de Mantenimiento podras usar <b> funciones extras</b>
+            como por ejemplo <b>descargar un PDF </b>con todos los datos proporcionados, <b>Buscar un ID </b>en especifico, <b> Borrar un registro </b>
+            y <b>Modificar un Registro</b> si es requerido</p><br>
 
             <p>¡Listo! Ahora estás completamente equipado para utilizar nuestro sistema de registro de 
                 mantenimiento de servicios de manera efectiva. Recuerda que puedes acceder a esta 

@@ -376,6 +376,12 @@ if(isset($_POST['btnModificar'])){
     $cone = conectar();
     if ($cone == false) {
         $mensaje = "Error: Falla en la conexion a la BD...";
+      }else if($ID ==""){
+        $mensaje ="¡Falta el Numero de ID para Modificar!";
+      }else if($NUsuario == "" || $APMaterno == "" || $APParteno == "" ||$Marca == "" ||$Modelo == "" ||$numSerie == "" ||$numInventario == "" 
+                ||$So == "" ||$Procesador == "" ||$DiscoDuro == "" ||$Ram == "" ||$TipoMemoria == "" ||$Observaciones == "" ||$contraseña == "" ||
+                $NEquipo == "" ||$IP == "" ||$Mac == ""){
+        $mensaje ="Se Deben Llenar Todos los Campos Disponibles";
       }else {
         $sql = "SELECT * FROM DatosEquipo WHERE iduser = $ID";
         $resultado = mysqli_query($cone, $sql);
@@ -388,6 +394,25 @@ if(isset($_POST['btnModificar'])){
         Mac='$Mac', Departamento='$Departamento' WHERE iduser=$ID";
 
         if (operacion($sql, $cone)) {
+            $ID = "";
+            $NUsuario = "";
+            $APMaterno = "";
+            $APParteno = "";
+            $Marca = "";
+            $Modelo = "";
+            $numSerie = "";
+            $numInventario = "";
+            $So = "";
+            $Procesador = "";
+            $DiscoDuro = "";
+            $Ram = "";
+            $TipoMemoria = "";
+            $Observaciones = "";
+            $contraseña = "";
+            $NEquipo = "";
+            $IP = "";
+            $Mac = "";
+            $Departamento =  "";
             $mensaje = "¡Datos modificados correctamente!";
 
         } 
@@ -508,98 +533,98 @@ if (isset($_POST['IDPasar'])) {
     
                 <td> 
                 <label for="ID" >Número de ID:
-                <input type="number" name="ID" id="ID" class="entrada" pattern="[0-9]+" value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']))echo $ID; ?>">
+                <input type="number" name="ID" id="ID" class="entrada" pattern="[0-9]+" value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnModificar']))echo $ID; ?>">
 
                 <span class="error"></span><br>
                 <p class="Notas"><b>NOTA:</b> No es necesario llenar el campo del <b>ID</b> en caso de querer Guardar</p>
                 </label>
 
                 <label for="NUsuario" >Nombre del Usuario:
-                <input type="text" name="NUsuario" id="NUsuario" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']) || isset($_POST['btnGuardar']))echo $NUsuario; ?>">
+                <input type="text" name="NUsuario" id="NUsuario" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']) || isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $NUsuario; ?>">
 
                 <span class="error"></span><br>
                 </label>
 
                     <label for="APParteno">Apellido Paterno:
-                    <input type="text" id="APParteno" name="APParteno" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $APParteno; ?>">
+                    <input type="text" id="APParteno" name="APParteno" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $APParteno; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="APMaterno">Apellido Materno:
-                    <input type="text" id="APMaterno" name="APMaterno" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $APMaterno; ?>">
+                    <input type="text" id="APMaterno" name="APMaterno" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $APMaterno; ?>">
                     <span class="error"></span><br>
                     </label>
             
                     <label for="Marca">Marca:
-                    <input type="text" id="Marca" name="Marca" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $Marca; ?>">
+                    <input type="text" id="Marca" name="Marca" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $Marca; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Modelo">Modelo:
-                    <input type="text" id="Modelo" name="Modelo" class="entrada" pattern="[A-Z,0-9,-]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $Modelo; ?>">
+                    <input type="text" id="Modelo" name="Modelo" class="entrada" pattern="[A-Z,0-9,-]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $Modelo; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="numSerie">Numero de Serie:
-                    <input type="text" id="numSerie" name="numSerie" class="entrada" value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $numSerie; ?>">
+                    <input type="text" id="numSerie" name="numSerie" class="entrada" value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $numSerie; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="numInventario">Numero de Inventario:
-                    <input type="number" id="numInventario" name="numInventario" class="entrada" pattern="[0-9]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']) || isset($_POST['btnGuardar']))echo $numInventario; ?>">
+                    <input type="number" id="numInventario" name="numInventario" class="entrada" pattern="[0-9]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']) || isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $numInventario; ?>">
                     <span class="error"></span><br>
                     </label>
                 </td>
 
                 <td> 
                     <label for="So">So:
-                    <input type="text" id="So" name="So" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $So; ?>">
+                    <input type="text" id="So" name="So" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $So; ?>">
                     <span class="error"></span><br>
                     </label>
             
                     <label for="Procesador">Procesador:
-                    <input type="text" id="Procesador" name="Procesador" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $Procesador; ?>">
+                    <input type="text" id="Procesador" name="Procesador" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $Procesador; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="DiscoDuro">Disco Duro:
-                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]+([G,M,B,]{1})"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $DiscoDuro; ?>">
+                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]+([G,M,B,]{1})"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $DiscoDuro; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Ram">Memoria Ram:
-                    <input type="text" id="Ram" name="Ram" class="entrada" pattern="[0-9]+([G,M,B,]{1})"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $Ram; ?>">
+                    <input type="text" id="Ram" name="Ram" class="entrada" pattern="[0-9]+([G,M,B,]{1})"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $Ram; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="TipoMemoria">Tipo de Memoria:
-                    <input type="text" id="TipoMemoria"  name="TipoMemoria" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $TipoMemoria; ?>">
+                    <input type="text" id="TipoMemoria"  name="TipoMemoria" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $TipoMemoria; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Observaciones">Observaciones:
-                    <input type="text" id="Observaciones"  name="Observaciones" class="CajonGrande"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $Observaciones; ?>">
+                    <input type="text" id="Observaciones"  name="Observaciones" class="CajonGrande"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $Observaciones; ?>">
                     <span class="error"></span><br>
                     </label>
                 </td>
                 <td> 
                     <label for="contraseña">Contraseña:
-                    <input type="password" id="contraseña"  name="contraseña" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $contraseña; ?>">
+                    <input type="password" id="contraseña"  name="contraseña" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $contraseña; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="NEquipo">Nombre del Equipo:
-                    <input type="text" id="NEquipo"  name="NEquipo" class="entrada" pattern="[A-Z,0-9]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $NEquipo; ?>">
+                    <input type="text" id="NEquipo"  name="NEquipo" class="entrada" pattern="[A-Z,0-9]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $NEquipo; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="IP">IP:
-                    <input type="text" id="IP"  name="IP" class="entrada" pattern="((^|\.)((25[0-5]_*)|(2[0-4]\d_*)|(1\d\d_*)|([1-9]?\d_*))){4}_*$"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $IP; ?>">
+                    <input type="text" id="IP"  name="IP" class="entrada" pattern="((^|\.)((25[0-5]_*)|(2[0-4]\d_*)|(1\d\d_*)|([1-9]?\d_*))){4}_*$"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $IP; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Mac" >Mac:
-                    <input type="text" id="Mac"  name="Mac" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar']))echo $Mac; ?>">
+                    <input type="text" id="Mac"  name="Mac" class="entrada"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $Mac; ?>">
                     <span class="error"></span><br>
                     </label>
 
@@ -635,18 +660,22 @@ if (isset($_POST['IDPasar'])) {
                
             </table><br>
             <?php
-                if ($mensaje == "¡Datos modificados correctamente!" || $mensaje == "¡Datos registrados correctamente!" || $mensaje == "¡Se a Eliminado el Registro con el ID: $ID Exitosamente!" || $mensaje == "¡Registros Encontrados Correctamente.!" || $mensaje == "¡Registro Descargado Correctamente.!") {
-                    echo '<div style="position: absolute ; top: 50%; left: 50%; transform: translate(50%, 800%); 
-                    background-color: #f2f2f2; border: 1px solid #ddd; border-radius: 5px; padding: 10px; display: inline-block;">';
-                    echo '<span style="color: #4CAF50; font-size: 24px; margin-right: 10px;">&#10004;</span>';
-                    
-                    echo "<span style='color: #333; font-size: 18px;'>$mensaje</span>";
+                if ($mensaje == "¡Datos modificados correctamente!" || $mensaje == "¡Datos registrados correctamente!"|| $mensaje == "¡Registros Encontrados Correctamente.!" || $mensaje == "¡Registro Descargado Correctamente.!") {
+                    echo '<div class="Mensaje">';
+                    echo '<span class="Mensaje2">&#10004;</span>';
+                    echo "<span class='MensajeLetra'>$mensaje</span>";
                     echo '</div>';
                     }
+                    else if($mensaje == "¡Se a Eliminado el Registro con el ID: $ID Exitosamente!" ){
+                        echo '<div class="MensajeL">';
+                        echo '<span class="Mensaje2">&#10004;</span>';
+                        echo "<span class='MensajeLetra'>$mensaje</span>";
+                        echo '</div>'; 
+                    }
                     else {
-                        echo "<div style='background-color: #f2dede; border: 1px solid #ebccd1; border-radius: 5px; padding: 10px; display: inline-block;'>";
-                        echo "<span style='color: #a94442; font-size: 24px; margin-right: 10px;'>&#10006;</span>";
-                        echo "<span style='color: #a94442; font-size: 18px;'>$mensaje</span>";
+                        echo "<div class='MensajeError'>";
+                        echo "<span class='MensajeErrorX'>&#10006;</span>";
+                        echo "<span class='MensajeErrorColor'>$mensaje</span>";
                         echo "</div>";
                     } 
             ?>

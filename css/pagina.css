@@ -354,3 +354,50 @@ caption{
   margin-top: 10px;
   margin-bottom: 15px;
 }
+.Mensaje{
+  position: absolute ; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(50%, 800%); 
+  background-color: #f2f2f2; 
+  border: 1px solid #ddd; 
+  border-radius: 5px; 
+  padding: 10px; 
+  display: inline-block;
+}
+.MensajeL{
+  position: absolute ; 
+  top: 50%; 
+  left: 38%; 
+  transform: translate(50%, 800%); 
+  background-color: #f2f2f2; 
+  border: 1px solid #ddd; 
+  border-radius: 5px; 
+  padding: 10px; 
+  display: inline-block;
+}
+.Mensaje2{
+  color: #4CAF50;
+  font-size: 24px;
+  margin-right: 10px;
+}
+.MensajeLetra{
+  color: #333; 
+  font-size: 18px;
+}
+.MensajeError{
+  background-color: #f2dede; 
+  border: 1px solid #ebccd1; 
+  border-radius: 5px;
+  padding: 10px; 
+  display: inline-block;
+}
+.MensajeErrorX{
+  color: #a94442; 
+  font-size: 24px;
+  margin-right: 10px;
+}
+.MensajeErrorColor{
+  color: #a94442; 
+  font-size: 18px;
+}
