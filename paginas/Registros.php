@@ -37,13 +37,14 @@ if (isset($_POST['departamentos'])) {
     // Genera la tabla HTML con los datos obtenidos
     if ($result->num_rows > 0) {
         $mensaje .= "<table>";
-        $mensaje .= "<tr><th>ID del Usuario</th><th>Número de Equipo</th><th>IP</th><th>No°Inventario</th></tr>";
+        $mensaje .= "<tr><th>ID del Usuario</th><th>Número de Equipo</th><th>IP</th><th>No°Inventario</th><th>Departamento</th></tr>";
         while ($row = $result->fetch_assoc()) {
             $mensaje .= "<tr>";
             $mensaje .= "<td>" . $row['iduser'] . "</td>";
             $mensaje .= "<td>" . $row['NEquipo'] . "</td>";
             $mensaje .= "<td>" . $row['IP'] . "</td>";
             $mensaje .= "<td>" . $row['numInventario'] . "</td>";
+            $mensaje .= "<td>" .$row['Departamento']. "</td>";
             $mensaje .= "<td>  
                             <form method='post' action='CPUS.php'>
                                 <input type='hidden' name='IDPasar' value='" . $row['iduser'] . "'>

@@ -118,7 +118,6 @@ if(isset($_POST['btnPDF'])){
         $mensaje = "Ingresa el ID de Usuario para Descargar un PDF.";
     }
     else{
-
         include('../bd/bd.php');
         $cone = conectar();
         $sql = "SELECT iduser FROM datosequipo ORDER BY iduser DESC LIMIT 1";
@@ -126,22 +125,11 @@ if(isset($_POST['btnPDF'])){
         
         $resultado2 = $cone->query($sql);
         $resultado = mysqli_query($cone, $sql2);
-                
-        if ($resultado2->num_rows > 0) {
-            $fila = $resultado2->fetch_assoc();
-            $ultimo_id = $fila['iduser'];
-        } 
-        else {
-            $ultimo_id = 0;
-        }
-        
-        $nuevo_id = $ultimo_id;
 
         //Obtener los Datos para Agregar en el PDF
         if (mysqli_num_rows($resultado) > 0) {
             // Imprimir los resultados
             while($fila = mysqli_fetch_assoc($resultado)) {
-
                 
                 $id = $fila["iduser"];
                 $NUsuario = $fila["nombre"];
@@ -276,7 +264,7 @@ if(isset($_POST['btnPDF'])){
                 // Calcular la posición horizontal para centrar el código de barras
                 $pageWidth = $pdf->GetPageWidth();
                 $x = ($pageWidth - $barcodeWidth) / 2;
-                $pdf->write1DBarcode($nuevo_id, 'C128', $x, '', $barcodeWidth, $barcodeHeight, 0.4, $style = array('position' => 'S', 'border' => 0, 'padding' => 0, 'fontsize' => 8, 'text' => true, 'stretchtext' => 0, 'align' => 'C'), 'N');
+                $pdf->write1DBarcode($ID, 'C128', $x, '', $barcodeWidth, $barcodeHeight, 0.4, $style = array('position' => 'S', 'border' => 0, 'padding' => 0, 'fontsize' => 8, 'text' => true, 'stretchtext' => 0, 'align' => 'C'), 'N');
                                      
                 
                 $pdf->Output('Mantenimiento.pdf', 'D');
