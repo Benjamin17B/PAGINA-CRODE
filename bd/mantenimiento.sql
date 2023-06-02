@@ -44,5 +44,14 @@ CREATE TABLE DatosEquipo(
 );
 
 
-INSERT INTO DatosEquipo(iduser,nombre,apellidoP,apellidoM,marca,modelo,numserie,numInventario,So,Procesador,DiscoDuro,Ram,TipoMemoria,Observaciones,contraseña,NEquipo,IP,Mac,Departamento) 
-VALUES(NULL, 'MARIO','BALTASAR','CARACHEO','LG','SUPER MULTI','DD8D','CORE INTEL','VB5B8',4,'SAS','147DD','4G','5G','MUY RAPIDA','SE ENCONTRO UN PROBLEMA EN LA MAQUINA','ABCD','MAQUINA1','DIR');
+INSERT INTO DatosEquipo (nombre, apellidoP, apellidoM, marca, modelo, numserie, numInventario, So, Procesador, DiscoDuro, Ram, TipoMemoria, Observaciones, contraseña, NEquipo, IP, Mac, Departamento) 
+VALUES('JUAN', 'PEREZ', 'GOMEZ', 'Samsung', 'Galaxy S9', 'XYZ123', 10, 'Android', 'Snapdragon 845', '64GB', '4GB', 'DDR4', 'Sin problemas', '123456', 'Equipo2', '192.168.0.10', 'AA:BB:CC:DD:EE:FF', 'DIR'),
+('MARIA', 'GONZALEZ', 'LOPEZ', 'Apple', 'MacBook Pro', 'ABC456', 15, 'macOS', 'Intel Core i7', '512GB', '16GB', 'DDR3', 'Sin observaciones', '987654', 'Equipo3', '10.0.0.5', '11:22:33:44:55:66', 'RMS'),
+('PEDRO', 'RODRIGUEZ', 'SANCHEZ', 'HP', 'Pavilion', 'PQR789', 20, 'Windows 10', 'AMD Ryzen 5', '1TB', '8GB', 'DDR4', 'Rendimiento lento', 'qwerty', 'Equipo4', '192.168.1.50', 'BB:CC:DD:EE:FF:AA', 'RMS'),
+('ANA', 'LÓPEZ', 'MARTÍNEZ', 'Dell', 'Inspiron', 'XYZ789', 25, 'Windows 11', 'Intel Core i5', '256GB', '8GB', 'DDR4', 'Sin problemas', 'password123', 'Equipo5', '192.168.2.100', 'CC:DD:EE:FF:AA:BB', 'PPP'),
+('CARLOS', 'SÁNCHEZ', 'RAMOS', 'Lenovo', 'ThinkPad', 'LMN456', 30, 'Windows 10', 'Intel Core i7', '512GB', '16GB', 'DDR4', 'Sin observaciones', 'abcd123', 'Equipo6', '192.168.0.15', 'FF:EE:DD:CC:BB:AA', 'PPP'),
+('SOFIA', 'MARTÍNEZ', 'GARCÍA', 'Acer', 'Aspire', 'JKL123', 35, 'Windows 10', 'AMD Ryzen 7', '1TB', '8GB', 'DDR4', 'Sin problemas', 'admin123', 'Equipo7', '192.168.1.70', 'AA:BB:CC:DD:EE:FF', 'RMS'),
+('LUCÍA', 'GUTIÉRREZ', 'HERNÁNDEZ', 'Asus', 'VivoBook', 'DEF456', 40, 'Windows 10', 'Intel Core i5', '256GB', '8GB', 'DDR4', 'Sin observaciones', 'qwerty123', 'Equipo8', '192.168.2.150', 'BB:CC:DD:EE:FF:AA', 'DIR'),
+('MIGUEL', 'FERNÁNDEZ', 'CRUZ', 'Toshiba', 'Satellite', 'XYZ789', 45, 'Windows 10', 'Intel Core i7', '1TB', '12GB', 'DDR4', 'Rendimiento lento', 'password', 'Equipo9', '192.168.1.100', 'CC:DD:EE:FF:AA:BB', 'PPP'),
+('DANIELA', 'RAMÍREZ', 'LOZANO', 'Sony', 'VAIO', 'ABC123', 50, 'Windows 10', 'Intel Core i5', '256GB', '8GB', 'DDR4', 'Sin problemas', 'admin', 'Equipo10', '192.168.2.200', 'AA:BB:CC:DD:EE:FF', 'RMS');
+
