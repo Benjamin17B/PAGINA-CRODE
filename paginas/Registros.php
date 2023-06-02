@@ -32,6 +32,9 @@ if (isset($_POST['departamentos'])) {
     }
 
     $sql = "SELECT * FROM datosequipo WHERE Departamento = '$departamentos'";
+    if($departamentos == ""){
+        $sql = "SELECT * FROM datosequipo";
+    }
     $result = $conn->query($sql);
 
     // Genera la tabla HTML con los datos obtenidos
