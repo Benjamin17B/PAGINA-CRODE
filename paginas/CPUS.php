@@ -520,36 +520,36 @@ if (isset($_POST['IDPasar'])) {
                 </tr>
     
                 <td> 
-                <label for="ID" >Número de ID:
-                <input type="number" name="ID" id="ID" class="entrada" pattern="[0-9]+" value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnModificar']))echo $ID; ?>">
+                    <label for="ID" >Número de ID:
+                    <input type="number" name="ID" id="ID" class="entrada" pattern="[0-9]+" value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnModificar']))echo $ID; ?>">
 
-                <span class="error"></span><br>
-                <p class="Notas"><b>NOTA:</b> No es necesario llenar el campo del <b>ID</b> en caso de querer Guardar</p>
-                </label>
+                    <span class="error"></span><br>
+                    <p class="Notas"><b>NOTA:</b> No es necesario llenar el campo del <b>ID</b> en caso de querer Guardar</p>
+                    </label>
 
-                <label for="NUsuario" >Nombre del Usuario:
-                <input type="text" name="NUsuario" id="NUsuario" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']) || isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $NUsuario; ?>">
+                    <label for="NUsuario" >Nombre del Usuario:
+                    <input type="text" name="NUsuario" id="NUsuario" class="entrada" pattern="[a-z, A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar']) || isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $NUsuario; ?>">
 
-                <span class="error"></span><br>
-                </label>
+                    <span class="error"></span><br>
+                    </label>
 
                     <label for="APParteno">Apellido Paterno:
-                    <input type="text" id="APParteno" name="APParteno" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $APParteno; ?>">
+                    <input type="text" id="APParteno" name="APParteno" class="entrada" pattern="[a-z, A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $APParteno; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="APMaterno">Apellido Materno:
-                    <input type="text" id="APMaterno" name="APMaterno" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $APMaterno; ?>">
+                    <input type="text" id="APMaterno" name="APMaterno" class="entrada" pattern="[a-z, A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $APMaterno; ?>">
                     <span class="error"></span><br>
                     </label>
             
                     <label for="Marca">Marca:
-                    <input type="text" id="Marca" name="Marca" class="entrada" pattern="[A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $Marca; ?>">
+                    <input type="text" id="Marca" name="Marca" class="entrada" pattern="[a-z, A-Z ]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $Marca; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Modelo">Modelo:
-                    <input type="text" id="Modelo" name="Modelo" class="entrada" pattern="[A-Z,0-9,-]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $Modelo; ?>">
+                    <input type="text" id="Modelo" name="Modelo" class="entrada" pattern="[a-z, A-Z,0-9,-]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $Modelo; ?>">
                     <span class="error"></span><br>
                     </label>
 
@@ -576,7 +576,7 @@ if (isset($_POST['IDPasar'])) {
                     </label>
 
                     <label for="DiscoDuro">Disco Duro:
-                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]+([G,M,B,]{2})"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $DiscoDuro; ?>">
+                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]+([T,G,M,B,]{2})"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $DiscoDuro; ?>">
                     <span class="error"></span><br>
                     </label>
 
@@ -602,7 +602,7 @@ if (isset($_POST['IDPasar'])) {
                     </label>
 
                     <label for="NEquipo">Nombre del Equipo:
-                    <input type="text" id="NEquipo"  name="NEquipo" class="entrada" pattern="[A-Z,0-9]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $NEquipo; ?>">
+                    <input type="text" id="NEquipo"  name="NEquipo" class="entrada" pattern="[a-z, A-Z,0-9]+"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $NEquipo; ?>">
                     <span class="error"></span><br>
                     </label>
 
@@ -677,5 +677,3 @@ if (isset($_POST['IDPasar'])) {
 </footer>
 </body>
 </html>
-
-<!-- localhost:8017/PRACTICA/paginas/CPU'S.php -->
