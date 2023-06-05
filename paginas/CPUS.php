@@ -576,12 +576,12 @@ if (isset($_POST['IDPasar'])) {
                     </label>
 
                     <label for="DiscoDuro">Disco Duro:
-                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]+([G,M,B,]{1})"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $DiscoDuro; ?>">
+                    <input type="text" id="DiscoDuro" name="DiscoDuro" class="entrada" pattern="[0-9]+([G,M,B,]{2})"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $DiscoDuro; ?>">
                     <span class="error"></span><br>
                     </label>
 
                     <label for="Ram">Memoria Ram:
-                    <input type="text" id="Ram" name="Ram" class="entrada" pattern="[0-9]+([G,M,B,]{1})"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $Ram; ?>">
+                    <input type="text" id="Ram" name="Ram" class="entrada" pattern="[0-9]+([G,M,B,]{2})"  value="<?php if(isset($_POST['btnBuscar']) || isset($_POST['IDPasar'])|| isset($_POST['btnGuardar'])|| isset($_POST['btnModificar']))echo $Ram; ?>">
                     <span class="error"></span><br>
                     </label>
 

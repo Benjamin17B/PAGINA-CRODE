@@ -227,7 +227,7 @@ function Vdiscduro(){
       muestra(elemento,"Ingrese el Disco Duro");
     }
     if(elemento.validity.patternMismatch){
-      muestra(elemento,"Solo Acepta Numeros");
+      muestra(elemento,"Solo Acepta Numeros Y Dos caracteres (GB o MB)");
     }
     return false;
   }

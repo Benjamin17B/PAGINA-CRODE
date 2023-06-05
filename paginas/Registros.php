@@ -1,6 +1,7 @@
 <?php
 $mensaje = "";
 $listDepartamentos = [
+    'STD'=> "Seleccionar Todos los Departamentos",
     'ST' => "Subdirección técnica",
     'SA' => "Subdirección administrativa",
     'RMS' => "Recursos materiales y de servicios",
@@ -32,7 +33,7 @@ if (isset($_POST['departamentos'])) {
     }
 
     $sql = "SELECT * FROM datosequipo WHERE Departamento = '$departamentos'";
-    if($departamentos == ""){
+    if($departamentos == "STD"){
         $sql = "SELECT * FROM datosequipo";
     }
     $result = $conn->query($sql);
@@ -47,7 +48,7 @@ if (isset($_POST['departamentos'])) {
             $mensaje .= "<td>" . $row['NEquipo'] . "</td>";
             $mensaje .= "<td>" . $row['IP'] . "</td>";
             $mensaje .= "<td>" . $row['numInventario'] . "</td>";
-            $mensaje .= "<td>" .$row['Departamento']. "</td>";
+            $mensaje .= "<td>" . $row['Departamento']. "</td>";
             $mensaje .= "<td>  
                             <form method='post' action='CPUS.php'>
                                 <input type='hidden' name='IDPasar' value='" . $row['iduser'] . "'>
@@ -58,7 +59,15 @@ if (isset($_POST['departamentos'])) {
         }
         $mensaje .= "</table>";
     } else {
-        $mensaje .= "No se encontraron registros en el departamento de $departamentos";
+        if($departamentos == ""){
+            $mensaje = "Seleccione un Departamento";
+        }
+        else if($departamentos == "NA"){
+            $mensaje = "No hay Registros que no se Hallan Asignado a Ningun Departamento";
+        }
+        else{
+            $mensaje .= "No se encontraron registros en el departamento de $departamentos";
+        }
     }
 
     $conn->close();
