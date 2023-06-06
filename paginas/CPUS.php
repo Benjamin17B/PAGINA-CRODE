@@ -382,6 +382,7 @@ if(isset($_POST['btnModificar'])){
         Mac='$Mac', Departamento='$Departamento' WHERE iduser=$ID";
 
         if (operacion($sql, $cone)) {
+            $mensaje = "¡Datos modificados en el ID: $ID correctamente!";
             $ID = "";
             $NUsuario = "";
             $APMaterno = "";
@@ -401,7 +402,7 @@ if(isset($_POST['btnModificar'])){
             $IP = "";
             $Mac = "";
             $Departamento =  "";
-            $mensaje = "¡Datos modificados correctamente!";
+          
 
         } 
         else {
@@ -651,7 +652,7 @@ if (isset($_POST['IDPasar'])) {
                
             </table><br>
             <?php
-                if ($mensaje == "¡Datos modificados correctamente!" || $mensaje == "¡Datos registrados correctamente!"|| $mensaje == "¡Registros Encontrados Correctamente.!" || $mensaje == "¡Registro Descargado Correctamente.!") {
+                if ($mensaje == "¡Datos modificados en el ID: $ID correctamente!" || $mensaje == "¡Datos registrados correctamente!"|| $mensaje == "¡Registros Encontrados Correctamente.!" || $mensaje == "¡Registro Descargado Correctamente.!") {
                     echo '<div class="Mensaje">';
                     echo '<span class="Mensaje2">&#10004;</span>';
                     echo "<span class='MensajeLetra'>$mensaje</span>";
