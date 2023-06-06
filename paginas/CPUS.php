@@ -484,6 +484,9 @@ if (isset($_POST['IDPasar'])) {
     function confirmarBorrado() {
         return confirm('¿Estás seguro de que deseas borrar este registro?');
     }
+    function confirmarModificar(){
+        return confirm('¿Estás seguro de que deseas Modificar este registro?');
+    }
 </script>
 </head>
 <header>
@@ -621,7 +624,7 @@ if (isset($_POST['IDPasar'])) {
                     
                     <br><br><br>
                     <button id="btnBorrar" name="btnBorrar" class="boton" type="submit" onclick="return confirmarBorrado()">BORRAR</button>
-                    <button id="btnModificar" name="btnModificar" class="boton" type="submit">MODIFICAR</button>
+                    <button id="btnModificar" name="btnModificar" class="boton" type="submit" onclick="return confirmarModificar()">MODIFICAR</button>
                     <br><br><br>
                     <button id="btnPDF" name="btnPDF" class="boton" type="submit">DESCARGAR PDF</button>
                 </td>

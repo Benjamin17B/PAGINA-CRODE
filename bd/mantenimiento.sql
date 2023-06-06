@@ -3,6 +3,8 @@ CREATE DATABASE mantenimiento CHARACTER SET utf8mb4
 COLLATE utf8mb4_general_ci;
 USE Mantenimiento;*/
 
+
+/**********************   CPUS  ***********************/
 CREATE TABLE DatosEquipo(
   iduser INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   nombre VARCHAR(20) NOT NULL,
@@ -24,8 +26,31 @@ CREATE TABLE DatosEquipo(
   Mac VARCHAR(30) NOT NULL,
   Departamento VARCHAR(100)
   );
+/**********************   IMPRESORAS  ***********************/
 
-  /*  DEPARTAMENTO  */
+  CREATE TABLE DatosEquipo(
+  iduser INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  nombre VARCHAR(20) NOT NULL,
+  apellidoP VARCHAR(20) NOT NULL,
+  apellidoM VARCHAR(30) NOT NULL,
+  marca VARCHAR(30) NOT NULL,
+  modelo VARCHAR(30) NOT NULL,
+  numserie VARCHAR(15) NOT NULL,
+  numInventario INT(5) NOT NULL,
+  So VARCHAR(30) NOT NULL,
+  Procesador VARCHAR(30) NOT NULL,
+  DiscoDuro VARCHAR(30) NOT NULL,
+  Ram VARCHAR(30) NOT NULL,
+  TipoMemoria VARCHAR(30) NOT NULL,
+  Observaciones VARCHAR(30) NOT NULL,
+  contraseña VARCHAR(30) NOT NULL,
+  NEquipo VARCHAR(30) NOT NULL,
+  IP VARCHAR(30) NOT NULL,
+  Mac VARCHAR(30) NOT NULL,
+  Departamento VARCHAR(100)
+  );
+
+  /*  DEPARTAMENTO(ya no es necesario)  */
 
  CREATE TABLE area (
   idarea INT AUTO_INCREMENT NOT NULL,
