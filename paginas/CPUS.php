@@ -473,7 +473,7 @@ if (isset($_POST['IDPasar'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>CPU'S</title>
